@@ -13,9 +13,9 @@ This is just a decoy
 Locate to the appropriate branch for your team
 
 ## Laravel
-- [Master](https://github.com/hngi/SavageCollection-BE/laravel-master)
-- [Develop](https://github.com/hngi/SavageCollection-BE/laravel-develop)
+- [Master](https://github.com/hngi/SavageCollection-BE/tree/laravel-master)
+- [Develop](https://github.com/hngi/SavageCollection-BE/tree/laravel-develop)
 
 ## Node
-- [Master](https://github.com/hngi/SavageCollection-BE/node-master)
-- [Develop](https://github.com/hngi/SavageCollection-BE/node-develop)
+- [Master](https://github.com/hngi/SavageCollection-BE/tree/node-master)
+- [Develop](https://github.com/hngi/SavageCollection-BE/tree/node-develop)
