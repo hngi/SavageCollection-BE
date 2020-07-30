@@ -22,8 +22,8 @@ Route::view('/all_post', 'all_post'); // Uncomment this when view ready
 Auth::routes();
 
 // View and Controller for logged in dashboard
-Route::get('/dashboard', 'DashboardController@home')->name('dashboard.home');
-Route::get('/new_upload', 'DashboardController@newUpload')->name('dashboard.new_upload');
+Route::get('/dashboard', 'DashboardController@home')->name('dashboard.home'); // @eni4sure
+Route::get('/new_upload', 'DashboardController@newUpload')->name('dashboard.new_upload'); //@drOmoh
 
 // Actions
-Route::post('/new_upload', 'DashboardController@processNewUpload')->name('add.new_upload');
+Route::post('/new_upload', 'DashboardController@processNewUpload')->name('add.new_upload'); //@drOmoh

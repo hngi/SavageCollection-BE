@@ -1,3 +1,4 @@
+{{-- @eni4sure --}}
 @extends('layouts.app')
 
 @section('content')
