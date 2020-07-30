@@ -11,7 +11,7 @@ const { MONGO_URI } = process.env;
 const login = require("./routes/login");
 const register = require("./routes/register");
 const user = require("./routes/users");
-const changePassword = require('./routes/changePassword');
+const changePassword = require("./routes/changePassword");
 
 const app = express();
 app.use(cors());
@@ -50,6 +50,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //routes
+app.get("/", (req, res) => {
+  res.status(200).render("index");
+});
 app.use(login);
 app.use(register);
 app.use(user);

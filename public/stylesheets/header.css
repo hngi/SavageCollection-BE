@@ -1,0 +1,36 @@
+:root {
+    --sc-black: black;
+    --sc-blue: #262b48;
+    --sc-l-blue: #0056B3;
+    --sc-red: #DC3545;
+}
+
+@font-face {
+    font-family: 'Lemon Jelly';
+    src: url("../fonts/LemonJellyPersonalUse-dEqR.ttf");
+}
+
+/* nav bar */
+nav {
+    background-color: var(--sc-blue);
+}
+
+#logo {
+    font-family: 'Lemon Jelly' !important;
+    font-size: 60px;
+    color: var(--sc-l-blue);
+    line-height: 0px;
+}
+
+
+@media only screen and (max-width: 425px) {
+    #logo {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 425px) {
+    #logo {
+        font-size: 50px;
+    }
+}
