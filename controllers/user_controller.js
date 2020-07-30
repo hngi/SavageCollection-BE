@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 const UploadModel = require("../models/uploads");
 
 exports.CreatePost = (req, res, next) => {
+  if(!req.body.title){
+    return res.status(400).json({
+      success: false,
+      message: "Please provided the needed parameters"
+    })
+  }
   //new instance of the model to store data
   const uploadModel = new UploadModel({
     //data for the model
