@@ -11,7 +11,11 @@ const { MONGO_URI } = process.env;
 const login = require("./routes/login");
 const register = require("./routes/register");
 const user = require("./routes/users");
+
 const upload = require("./routes/upload");
+
+const changePassword = require("./routes/changePassword");
+
 
 const app = express();
 app.use(cors());
@@ -21,34 +25,49 @@ mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
+    useCreateIndex: true
   })
-  .catch((err) => console.error(err));
+  .catch(err => console.error(err));
 mongoose.Promise = global.Promise;
 mongoose.connection
   .on("connected", () => {
     console.log("mongoose connection open");
   })
-  .on("error", (error) => {
+  .on("error", error => {
     console.log(`connection error ${error.message}`);
   });
-
-// // view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "jade");
 
 //morgan middleware for logging
 app.use(logger("dev"));
 
+//to make the uploads folder publicly accessible
+app.use("/uploads", express.static("uploads"));
+
 //body-parser middleware for url endoded data and json data
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //routes
+app.get("/", (req, res) => {
+  res.status(200).render("index");
+});
 app.use(login);
 app.use(register);
 app.use(user);
+
 app.use(upload);
+
+app.use(changePassword);
+
+// view engine setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/css", express.static(path.join(__dirname, "/public/stylesheets")));
+app.use("/js", express.static(path.join(__dirname, "/public/javascripts")));
+app.use("/img", express.static(path.join(__dirname, "/public/images")));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -63,7 +82,11 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.json({
+    message: err.message,
+    error: err
+  });
+  res.send("Page does not exist");
 });
 
 module.exports = app;

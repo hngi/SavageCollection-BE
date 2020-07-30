@@ -4,29 +4,34 @@ const UploadSchema = mongoose.Schema(
   {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     image_url: {
-      type: String
+      type: String,
     },
     text: {
-      type: String
+      type: String,
     },
     type: {
       type: String,
-      emum: ["text", "image", "both"]
+      emum: ["text", "image", "both"],
     },
     points: {
-      type: Number
+      type: Number,
+      default: 1,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user"
-    }
+      ref: "user",
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
+
 module.exports = mongoose.model("upload", UploadSchema);
+
+module.exports = mongoose.model("uploads", UploadSchema);
+
