@@ -33,10 +33,23 @@
                     <div class="user-dashboard">
                         <h1>Hello, {{ Auth::user()->username }}</h1>
 
+                        {{-- Success if available --}}
+                        @if (\Session::has('success'))
+                            <div class="alert alert-success">{!! \Session::get('success') !!}</div>
+                        @endif
+                        {{-- Error if available --}}
+                        @if ($errors->all())
+                            <div class="alert alert-danger">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </div>
+                        @endif
+
                         <div class="container">
                             <h2>Image Upload</h2>
                             <hr />
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('add.image_upload') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="title">Title</label>
@@ -46,13 +59,14 @@
                                     <label for="meme_image">Choose Image</label>
                                     <input type="file" class="form-control" id="meme_image" name="meme_image" />
                                 </div>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Upload</button>
                             </form>
                         </div>
 
                         <div class="container">
                             <h2>Text Upload</h2>
                             <hr />
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('add.text_upload') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label for="title">Title</label>
@@ -62,6 +76,7 @@
                                     <label for="meme_text">Text</label>
                                     <textarea class="form-control" id="meme_text" name="meme_text" rows="5"></textarea>
                                 </div>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
                             </form>
                         </div>
 

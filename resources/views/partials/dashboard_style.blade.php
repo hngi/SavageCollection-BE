@@ -571,4 +571,16 @@ header {
     display: block;
     font-size: 18px;
 }
+.text_meme {
+    width: 100%;
+    height: 365px;
+    background: linear-gradient(to right, #FFEB3B, #FF5722);
+    height: 100%;
+    max-height: 365px;
+    overflow-x: overlay;
+}
+.meme_size {
+    width: 100%;
+    height: 365px;
+}
 </style>

@@ -9,41 +9,34 @@
 
         @include('partials.navbar')
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
-                </div>
+        <div class="min_wrap">
 
-                <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <div class="card text_meme">
-                      <div class="card-body text-center">
-                        <h2 class="card-text text-dark">orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,.</h2>
-                      </div>
+            {{-- Initialize uploads variable --}}
+            @php $user_uploads = App\Upload::all() @endphp
+            @php $user_uploads_count = count($user_uploads) @endphp
+
+            <div class="container mt-5">
+                @if ($user_uploads_count > 5)
+                    <div class="row">
+                        @foreach ($user_uploads as $data)
+                            @if ($data->type == 'image')
+                                <div class="mb-3 col-lg-4 col-md-4">
+                                    <img src="{{ asset('uploads/memes/'.$data->image) }}" class="img-responsive meme_size">
+                                </div>
+                            @else
+                                <div class="mb-3 col-lg-4 col-md-4">
+                                    <div class="card text_meme">
+                                    <div class="card-body text-center">
+                                        <h2 class="card-text text-dark">{{ $data->text }}</h2>
+                                    </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
-                </div>
-
-                <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
-                </div>
-
-                <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
-                </div>
-
-                <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
-                </div>
-
-                <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
-                </div>
-
-                <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
-                </div>
+                @else
+                    <div class="alert alert-warning">We have collected any savages :( . Check back later</div>
+                @endif
             </div>
         </div>
 
