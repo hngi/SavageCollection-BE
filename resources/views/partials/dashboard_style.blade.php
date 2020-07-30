@@ -583,4 +583,9 @@ header {
     width: 100%;
     height: 365px;
 }
+img.lazy {
+    background-image: url("{{ asset('loading.gif') }}");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
 </style>

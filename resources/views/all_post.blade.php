@@ -16,12 +16,12 @@
             @php $user_uploads_count = count($user_uploads) @endphp
 
             <div class="container mt-5">
-                @if ($user_uploads_count > 5)
+                @if ($user_uploads_count > 0)
                     <div class="row">
                         @foreach ($user_uploads as $data)
                             @if ($data->type == 'image')
                                 <div class="mb-3 col-lg-4 col-md-4">
-                                    <img src="{{ asset('uploads/memes/'.$data->image) }}" class="img-responsive meme_size">
+                                    <img data-src="{{ asset('uploads/memes/'.$data->image) }}" class="lazy img-responsive meme_size">
                                 </div>
                             @else
                                 <div class="mb-3 col-lg-4 col-md-4">
