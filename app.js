@@ -47,6 +47,11 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.status(200).render("index");
 });
+
+app.get("/review", (req, res) => {
+  res.status(200).render("review");
+});
+
 app.use(login);
 app.use(register);
 app.use(user);
@@ -78,7 +83,7 @@ app.use(function (err, req, res, next) {
     message: err.message,
     error: err
   });
-  res.send("Page does not exist");
+  // res.send("Page does not exist");
 });
 
 module.exports = app;
