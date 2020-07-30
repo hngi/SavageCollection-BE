@@ -21,21 +21,26 @@ mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
+    useCreateIndex: true
   })
-  .catch((err) => console.error(err));
+  .catch(err => console.error(err));
 mongoose.Promise = global.Promise;
 mongoose.connection
   .on("connected", () => {
     console.log("mongoose connection open");
   })
-  .on("error", (error) => {
+  .on("error", error => {
     console.log(`connection error ${error.message}`);
   });
 
-// // view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "jade");
+// view engine setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/css", express.static(path.join(__dirname, "/public/stylesheets")));
+app.use("/js", express.static(path.join(__dirname, "/public/javascripts")));
+app.use("/img", express.static(path.join(__dirname, "/public/images")));
 
 //morgan middleware for logging
 app.use(logger("dev"));
@@ -63,7 +68,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.send("Page does not exist");
 });
 
 module.exports = app;
