@@ -7,8 +7,8 @@ exports.create = async (req, res) => {
     try {
       let image_url = '';
       let points = 0;
-      if(req.file) image_url = await fileUpload(req);
-      if(req.file) points += 1;
+      if(req.files) image_url = await fileUpload(req);
+      if(req.files) points += 1;
       const uploads = new UploadModel({
         title, text, type, image_url, points
       });
