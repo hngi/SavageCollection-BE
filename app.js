@@ -5,7 +5,8 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const { MONGOLAB_URI } = process.env;
+require("dotenv").config();
+const { MONGO_URI } = process.env;
 
 const login = require("./routes/login");
 const register = require("./routes/register");
@@ -16,14 +17,10 @@ app.use(cors());
 
 //database code
 mongoose
-  .connect(
-    "mongodb+srv://savage:savage123@saavage-replies.aeejd.mongodb.net/savage-replies?retryWrites=true&w=majority",
-
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .catch((err) => console.error(err));
 mongoose.Promise = global.Promise;
 mongoose.connection
