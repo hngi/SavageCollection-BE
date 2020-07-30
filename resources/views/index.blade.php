@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+    @include('partials.head')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
+    @include('partials.style')
+
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/dashboard') }}">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+        @include('partials.navbar')
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="content">
+                        <h1>Savage Collector</h1>
+                        <h3>FUNNY, SAVAGE REPLIES</h3>
+                        <hr />
+                        <button class="btn btn-danger btn-lg"><i class="fa fa-paw"></i> See Savages</button>
+                    </div>
                 </div>
-            @endif
-
+            </div>
         </div>
+
+        <div id="how-it-works" class="mt-5 container text-uppercase">
+            <h3 class="text-center mb-5">How It Works</h3>
+            <div class="justify-content-center box text-center container">
+                <div class="card shadow-lg py-5 my-2 bg-info">
+                    <p lass="card-text">1. Upload your Savage photo of choice.</p>
+                </div>
+                <div class="card shadow-lg py-5 my-2 bg-info">
+                    <p lass="card-text">2. Get your points.</p>
+                </div>
+                <div class="card shadow-lg py-5 my-2 bg-info">
+                    <p lass="card-text">3. Get value worth of points.</p>
+                </div>
+                <div class="card shadow-lg py-5 my-2 bg-info">
+                    <p lass="card-text">4. Claim your rewards.</p>
+                </div>
+                <div class="card shadow-lg py-5 my-2 bg-info">
+                    <p lass="card-text">5. Get paid.</p>
+                </div>
+            </div>
+        </div>
+
+        @include('partials.footer')
     </body>
 </html>
-
-{{-- @eni4sure --}}
