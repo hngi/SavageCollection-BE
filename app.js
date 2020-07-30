@@ -33,18 +33,6 @@ mongoose.connection
     console.log(`connection error ${error.message}`);
   });
 
-<<<<<<< HEAD
-=======
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
-app.use(express.static(path.join(__dirname, "public")));
-app.use("/css", express.static(path.join(__dirname, "/public/stylesheets")));
-app.use("/js", express.static(path.join(__dirname, "/public/javascripts")));
-app.use("/img", express.static(path.join(__dirname, "/public/images")));
-
->>>>>>> 155cd52bdeaa3e2edfe88f9b38cae4d15f7d639a
 //morgan middleware for logging
 app.use(logger("dev"));
 
@@ -86,14 +74,11 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-<<<<<<< HEAD
   res.json({
     message: err.message,
-    error: err,
+    error: err
   });
-=======
   res.send("Page does not exist");
->>>>>>> 155cd52bdeaa3e2edfe88f9b38cae4d15f7d639a
 });
 
 module.exports = app;
