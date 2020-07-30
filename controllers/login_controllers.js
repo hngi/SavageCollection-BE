@@ -9,7 +9,7 @@ exports.LoginUser = async (req, res) => {
     if (!username && !password) {
       return res.status(400).json({
         success: false,
-        message: "Username And Password Is Required",
+        message: "Username And Password Is Required"
       });
     }
     const userFound = await UserModel.findOne({ username: username });
@@ -21,38 +21,43 @@ exports.LoginUser = async (req, res) => {
           {
             username: userFound.username,
             password: userFound.password,
-            email: userFound.email,
+            email: userFound.email
           },
           process.env.JWT_KEY,
           {
-            expiresIn: "2d",
+            expiresIn: "2d"
           }
         );
-        return res.status(200).json({
+        return res.status(200).send({
           success: true,
           message: "Log in Succesfull",
           data: {
             statusCode: 200,
             user: userFound,
-            token: apiToken,
-          },
+            token: apiToken
+          }
         });
       } else {
         return res.status(400).json({
           success: false,
-          message: "Incorrect Password",
+          message: "Incorrect Password"
         });
       }
     } else {
       return res.status(404).json({
         success: false,
-        message: "User Doesn't Exist",
+        message: "User Doesn't Exist"
       });
     }
   } catch (error) {
     return res.status(400).json({
       success: false,
-      message: error.message,
+      message: error.message
     });
   }
+};
+
+exports.getLogin = (req, res) => {
+  res.status(200);
+  res.render("login.ejs");
 };
