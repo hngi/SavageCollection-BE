@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// This will be replaced with homepage
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Auth Routes. LOGIN, REGISTER, REST PASSWORD and FORGOT PASSWORD
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// View and Controller for logged in dashboard
+Route::get('/dashboard', 'HomeController@index')->name('home');
