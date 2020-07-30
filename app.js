@@ -44,6 +44,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //routes
+app.get("/", (req, res) => {
+  res.status(200).render("index");
+});
 app.use(login);
 app.use(register);
 app.use(user);

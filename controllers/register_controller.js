@@ -1,35 +1,36 @@
-const UserModel = require('../models/users');
-const bCrypt = require('bcrypt');
+const UserModel = require("../models/users");
+const bCrypt = require("bcrypt");
 
 exports.RegisterUser = async (req, res) => {
-  const { email, username, password} = req.body;
+  const { email, username, password } = req.body;
   try {
     if (!username && !password) {
-        return res.status(400).json({
-          success: false,
-          message: "Username And Password Is Required"
-        });
-  
-    }
-    else {
+      return res.status(400).json({
+        success: false,
+        message: "Username And Password Is Required",
+      });
+    } else {
       let hashedPassword = await bCrypt.hash(password, 10);
       const user = new UserModel({
         email: email,
         username: username,
-        password: hashedPassword
+        password: hashedPassword,
       });
       await user.save();
       return res.status(200).json({
         succes: true,
-        messgae: "Registration Succesfull"
+        messgae: "Registration Succesfull",
       });
     }
   } catch (error) {
     return res.status(400).json({
       success: false,
-      message: error.message
+      message: error.message,
     });
   }
+};
 
-
+exports.getRegister = (req, res) => {
+  res.status(200);
+  res.render("register.ejs");
 };
