@@ -17,16 +17,16 @@ exports.RegisterUser = async (req, res) => {
         password: hashedPassword,
       });
       await user.save();
-      return res.status(200).json({
-        succes: true,
-        messgae: "Registration Succesfull",
-      });
+      req.flash("message", "User created");
+      res.status(201).redirect("/user/dashboard");
+      // return res.status(200).json({
+
+      //   succes: true,
+      //   messgae: "Registration Succesfull",
+      // });
     }
   } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    req.flash("message", `${error}`);
   }
 };
 
