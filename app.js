@@ -11,6 +11,7 @@ const { MONGO_URI } = process.env;
 const login = require("./routes/login");
 const register = require("./routes/register");
 const user = require("./routes/users");
+const changePassword = require('./routes/changePassword');
 
 const app = express();
 app.use(cors());
@@ -52,6 +53,7 @@ app.use(bodyParser.json());
 app.use(login);
 app.use(register);
 app.use(user);
+app.use(changePassword);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
