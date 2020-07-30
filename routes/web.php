@@ -13,10 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// This will be replaced with homepage
+Route::view('/', 'index');
 
+Route::view('/all_post', 'all_post'); // Uncomment this when view ready
+
+// Auth Routes. LOGIN, REGISTER, REST PASSWORD and FORGOT PASSWORD
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// View and Controller for logged in dashboard
+Route::get('/dashboard', 'DashboardController@home')->name('dashboard.home'); // @eni4sure
+Route::get('/new_upload', 'DashboardController@newUpload')->name('dashboard.new_upload'); //@drOmoh
+
+// Actions
+Route::post('/new_upload', 'DashboardController@processNewUpload')->name('add.new_upload'); //@drOmoh
