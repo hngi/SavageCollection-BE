@@ -17,18 +17,23 @@
                         <div class="card card-signin my-5">
                             <div class="card-body">
                                 <h5 class="card-title text-center">Sign In</h5>
-                                <form class="form-signin">
-
-                                    <div class="form-label-group">
-                                        <input type="email" id="email_address" class="form-control" placeholder="Email address" required />
-                                        <label for="email_address">Email address</label>
+                                @if ($errors->all())
+                                    <div class="alert alert-danger">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
                                     </div>
-
+                                @endif
+                                <form method="POST" action="{{ route('login') }}" class="form-signin">
+                                    @csrf
                                     <div class="form-label-group">
-                                        <input type="password" id="password" class="form-control" placeholder="Password" required />
+                                        <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email address" required />
+                                        <label for="email">Email address</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required />
                                         <label for="password">Password</label>
                                     </div>
-
                                     <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
 
                                     <hr class="my-4" />

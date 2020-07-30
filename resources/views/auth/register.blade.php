@@ -17,19 +17,27 @@
                         <div class="card card-signin my-5">
                             <div class="card-body">
                                 <h5 class="card-title text-center">Sign Up</h5>
-                                <form class="form-signin">
+                                @if ($errors->all())
+                                    <div class="alert alert-danger">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                <form method="POST" action="{{ route('register') }}" class="form-signin">
+                                    @csrf
                                     <div class="form-label-group">
-                                        <input type="text" id="username" class="form-control" placeholder="Username" required autofocus />
+                                        <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="Username" required autofocus />
                                         <label for="username">Username</label>
                                     </div>
 
                                     <div class="form-label-group">
-                                        <input type="email" id="email_address" class="form-control" placeholder="Email address" required />
-                                        <label for="email_address">Email address</label>
+                                        <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email address" required />
+                                        <label for="email">Email address</label>
                                     </div>
 
                                     <div class="form-label-group">
-                                        <input type="password" id="password" class="form-control" placeholder="Password" required />
+                                        <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required />
                                         <label for="password">Password</label>
                                     </div>
 
