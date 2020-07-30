@@ -12,7 +12,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
                 </div>
 
                 <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
@@ -26,23 +26,23 @@
                 </div>
 
                 <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
                 </div>
 
                 <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
                 </div>
 
                 <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
                 </div>
 
                 <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
                 </div>
 
                 <div class="mb-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+                    <img src="http://fakeimg.pl/365x365/" class="img-responsive meme_size">
                 </div>
             </div>
         </div>
