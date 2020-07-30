@@ -18,7 +18,11 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.26",
     "morgan": "~1.9.1",
+<<<<<<< HEAD
+    "multer": "^1.4.2",
+=======
     "nodemailer": "6.4.11",
+>>>>>>> 155cd52bdeaa3e2edfe88f9b38cae4d15f7d639a
     "nodemon": "^2.0.4"
   }
 }
