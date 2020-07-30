@@ -3,6 +3,7 @@ const { fileUpload } = require("../helpers/file_uploads");
 
 exports.create = async (req, res) => {
     const { title, text, type} = req.body;
+    const user = req.userData._id;
     console.log(req.userData);
     try {
       let image_url = '';
@@ -10,7 +11,7 @@ exports.create = async (req, res) => {
       if(req.files) image_url = await fileUpload(req);
       if(req.files) points += 1;
       const uploads = new UploadModel({
-        title, text, type, image_url, points
+        title, text, type, image_url, points, user
       });
       console.log(points);
       await uploads.save();
