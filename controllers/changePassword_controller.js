@@ -4,7 +4,6 @@ const User = require('../models/users');
 const bcrypt = require('bcrypt');
 
 exports.forgot = async (req, res)  => {
-    console.log(process.env.GMAIL_USER)
     const {username} = req.body;
     await crypto.randomBytes(20, function(err, buf) {
         let token = buf.toString('hex');
