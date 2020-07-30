@@ -22,15 +22,15 @@ mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
   })
-  .catch(err => console.error(err));
+  .catch((err) => console.error(err));
 mongoose.Promise = global.Promise;
 mongoose.connection
   .on("connected", () => {
     console.log("mongoose connection open");
   })
-  .on("error", error => {
+  .on("error", (error) => {
     console.log(`connection error ${error.message}`);
   });
 
@@ -48,11 +48,6 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.status(200).render("index");
 });
-
-app.get("/review", (req, res) => {
-  res.status(200).render("review");
-});
-
 app.use(login);
 app.use(register);
 app.use(user);
@@ -84,7 +79,6 @@ app.use(function (err, req, res, next) {
     message: err.message,
     error: err
   });
-  // res.send("Page does not exist");
 });
 
 const port = process.env.PORT || 3000;
