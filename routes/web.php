@@ -14,12 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 // This will be replaced with homepage
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'index');
+
+Route::view('/all_post', 'all_post'); // Uncomment this when view ready
 
 // Auth Routes. LOGIN, REGISTER, REST PASSWORD and FORGOT PASSWORD
 Auth::routes();
 
 // View and Controller for logged in dashboard
-Route::get('/dashboard', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@home')->name('dashboard.home');
+Route::get('/new_upload', 'DashboardController@newUpload')->name('dashboard.new_upload');
+
+// Actions
+Route::post('/new_upload', 'DashboardController@processNewUpload')->name('add.new_upload');
