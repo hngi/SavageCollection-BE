@@ -39,6 +39,9 @@ mongoose.connection
 //morgan middleware for logging
 app.use(logger("dev"));
 
+//to make the uploads folder publicly accessible
+app.use("/uploads", express.static("uploads"));
+
 //body-parser middleware for url endoded data and json data
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -61,7 +64,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  // res.render("error");
 });
 
 module.exports = app;
