@@ -28,7 +28,9 @@ exports.LoginUser = async (req, res) => {
             expiresIn: "2d",
           }
         );
-        render("/");
+        req.flash("message", "User Logged in");
+        res.status(200).redirect("/user/dashboard");
+
         return res.status(200).send({
           success: true,
           message: "Log in Succesfull",
