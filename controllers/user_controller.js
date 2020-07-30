@@ -1,3 +1,4 @@
 exports.test = (req, res) => {
-  res.status(200).json("testing user route");
+  console.log(req.userData);
+  res.status(200).json({ message: "testing user route" });
 };
