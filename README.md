@@ -8,20 +8,6 @@
 
 </div>
 
-This is just a decoy
-
-Locate to the appropriate branch for your team
-
-## Laravel
-- [Master](https://github.com/hngi/SavageCollection-BE/tree/laravel-master)
-- [Develop](https://github.com/hngi/SavageCollection-BE/tree/laravel-develop)
-
-## Node
-- [Master](https://github.com/hngi/SavageCollection-BE/tree/node-master)
-- [Develop](https://github.com/hngi/SavageCollection-BE/tree/node-develop)
-
-
-
 # Installation Guide
 
 - Install [Composer](https://getcomposer.org) &  [Laravel](https://laravel.com)
