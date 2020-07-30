@@ -1,0 +1,104 @@
+:root {
+    --sr-black: black;
+    --sr-blue: #262b48;
+    --sc-l-blue: #0056B3;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: 'Lemon Jelly';
+    src: url("../fonts/LemonJellyPersonalUse-dEqR.ttf");
+}
+
+body {
+    font-family: 'Lato', sans-serif !important;
+}
+
+img {
+    object-fit: cover;
+    object-position: top;
+    cursor: pointer;
+}
+
+/* nav bar */
+nav {
+    background-color: var(--sr-blue);
+}
+
+#logo {
+    font-family: 'Lemon Jelly' !important;
+    font-size: 60px;
+    color: var(--sc-l-blue);
+    line-height: 0px;
+}
+
+/* welcome */
+#welcome {
+    height: 60vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/assets/images/homepage.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+
+/* how it works */
+.box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px 20px;
+}
+
+/* images display */
+.grid-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px 20px;
+}
+
+#btn-view {
+    background-color: var(--sr-blue);
+
+}
+
+/* testimonials */
+img.img-resize {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.sc-card {
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    background-color: var(--sr-blue);
+}
+
+/* footer */
+footer {
+    background-color: var(--sr-blue);
+}
+
+@media only screen and (max-width: 330px) {
+    .grid-box {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        gap: 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    #logo {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 425px) {
+    #logo {
+        font-size: 50px;
+    }
+}

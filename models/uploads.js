@@ -18,6 +18,7 @@ const UploadSchema = mongoose.Schema(
     },
     points: {
       type: Number,
+      default: 1,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
