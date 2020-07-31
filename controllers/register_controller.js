@@ -58,46 +58,6 @@ exports.RegisterUser = async (req, res) => {
         });
       }
     });
-
-  // const { email, username, password } = req.body;
-  // try {
-  //   let hashedPassword = await bCrypt.hash(password, 10);
-  //   const user = new UserModel({
-  //     email: email,
-  //     username: username,
-  //     password: hashedPassword,
-  //   });
-  //   await user.save();
-
-  //   const apiToken = jwt.sign(
-  //     {
-  //       username: userFound.username,
-  //       password: userFound.password,
-  //       email: userFound.email,
-  //     },
-  //     process.env.JWT_KEY,
-  //     {
-  //       expiresIn: "2d",
-  //     }
-  //   );
-
-  // req.flash("message", "User created");
-
-  // res.cookie("auth", apiToken);
-
-  // res.status(201).redirect("/post");
-
-  //   return res.status(201).json({
-  //     succes: true,
-  //     messgae: "Registration Succesfull",
-  //   });
-  // } catch (error) {
-  //   return res.status(500).json({
-  //     succes: false,
-  //     messgae: "something went wrong",
-  //     error: error,
-  //   });
-  // }
 };
 
 exports.getRegister = (req, res) => {
