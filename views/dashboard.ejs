@@ -169,7 +169,14 @@
         </div>
       </div>
       <div class="user-upload text-center" id="upload">
-        <input type="file" onchange="readURL(this);" />
+        <form action="/post/create" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="file" name="image" />
+          </div>
+          <button type="submit" class="btn btn-lg btn-primary">
+            Upload
+          </button>
+        </form>
       </div>
     </main>
     <!-- main -->
