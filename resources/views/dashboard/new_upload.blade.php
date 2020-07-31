@@ -76,7 +76,7 @@
                                     <label for="meme_text">Text</label>
                                     <textarea class="form-control" id="meme_text" name="meme_text" rows="5"></textarea>
                                 </div>
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Upload</button>
                             </form>
                         </div>
 
