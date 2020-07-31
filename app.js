@@ -1,3 +1,4 @@
+const http = require("http");
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -7,11 +8,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
+const session = require("express-session");
+const flush = require("connect-flash");
 
 const login = require("./routes/login");
 const register = require("./routes/register");
 const user = require("./routes/users");
 const changePassword = require("./routes/changePassword");
+const dashboard = require("./routes/dashboard");
 
 const app = express();
 app.use(cors());
@@ -21,15 +25,15 @@ mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
   })
-  .catch(err => console.error(err));
+  .catch((err) => console.error(err));
 mongoose.Promise = global.Promise;
 mongoose.connection
   .on("connected", () => {
     console.log("mongoose connection open");
   })
-  .on("error", error => {
+  .on("error", (error) => {
     console.log(`connection error ${error.message}`);
   });
 
@@ -43,14 +47,26 @@ app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(
+  session({
+    secret: "secret",
+    cookie: { maxAge: 30000 },
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(flush());
+
 //routes
 app.get("/", (req, res) => {
-  res.status(200).render("index");
+  console.log(req);
+  res.status(200).render("index", { message: req.flash("message") });
 });
 app.use(login);
 app.use(register);
 app.use(user);
 app.use(changePassword);
+app.use(dashboard);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -76,9 +92,17 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    error: err
+    error: err,
   });
-  res.send("Page does not exist");
 });
 
-module.exports = app;
+const port = process.env.PORT || 3000;
+
+const server = http.createServer(app);
+
+server.listen(port, () => {
+  console.log("listening on port " + port);
+});
+
+
+// module.exports = app;
