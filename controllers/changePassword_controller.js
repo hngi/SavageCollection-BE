@@ -4,38 +4,39 @@ const User = require('../models/users');
 const bcrypt = require('bcrypt');
 
 exports.forgot = async (req, res)  => {
-    const {username} = req.body;
+    // console.log("body", req.body)
+    const {email} = req.body;
     try {
       await crypto.randomBytes(20, function(err, buf) {
         let token = buf.toString('hex');
         if (err) {
-            return res.status(404).json({
-                success: "false",
+            return res.status(400).render("forgotPassword", {
+                success: false,
                 message: "Error Occured",
                 data: {
-                    statusCode: 404,
+                    statusCode: 400,
                     error: err.message
                 }
             });
         }
   
-      User.findOne({ username: username }, function(err, user) {
+      User.findOne({ email: email }, function(err, user) {
         if (err) {
-          return res.status(404).json({
-            success: "false",
+          return res.status(400).render("forgotPassword", {
+            success: false,
             message: "Error finding user in DB",
             data: {
-                statusCode: 404,
+                statusCode: 400,
                 error: err.message
             }
         });
         }
         if (!user) {
-        return res.status(404).json({
-            success: "false",
-            message: "User Not Found. Make sure the username is rightly spelt",
+        return res.status(400).render("forgotPassword", {
+            success: false,
+            message: "User Not Found. Make sure the email is rightly spelt",
             data: {
-                statusCode: 404,
+                statusCode: 400,
                 error: "User Dosen't Exist"
             }
         });
@@ -44,11 +45,11 @@ exports.forgot = async (req, res)  => {
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
         user.save((err) => {
           if (err) {
-            return res.status(404).json({
-              success: "false",
+            return res.status(400).render("forgotPassword", {
+              success: false,
               message: "Error saving user",
               data: {
-                  statusCode: 404,
+                  statusCode: 400,
                   error: err.message
               }
           });
@@ -71,8 +72,8 @@ exports.forgot = async (req, res)  => {
             };
             smtpTransport.sendMail(mailOptions, function(err, info) {
               if (err) {
-                return res.status(400).json({
-                  success: "false",
+                return res.status(400).render("forgotPassword", {
+                  success: false,
                   message: "Error sending email.Possibly User has no email",
                   data: {
                       statusCode: 400,
@@ -80,8 +81,8 @@ exports.forgot = async (req, res)  => {
                   }
               });
               }
-            return res.status(200).json({
-                success: "true",
+            return res.status(200).render("forgotPassword", {
+                success: true,
                 message: "Email Sent" + info.response,
                 data: {
                     statusCode: 200,
@@ -108,8 +109,8 @@ exports.forgot = async (req, res)  => {
             };
             smtpTransport.sendMail(mailOptions, function(err, info) {
                 if (err) {
-                    return res.status(400).json({
-                        success: "false",
+                    return res.status(400).render("forgotPassword", {
+                        success: false,
                         message: "Error sending email.Possibly User has no email",
                         data: {
                             statusCode: 400,
@@ -117,8 +118,8 @@ exports.forgot = async (req, res)  => {
                         }
                     });
                 }
-                return res.status(200).json({
-                    success: "true",
+                return res.status(200).render("forgotPassword", {
+                    success: true,
                     message: "Email Sent" + info.response,
                     data: {
                         statusCode: 200,
@@ -138,8 +139,8 @@ exports.forgot = async (req, res)  => {
   });
     } 
   catch (error) {
-    return res.status(500).json({
-      success: "false",
+    return res.status(500).render("forgotPassword", {
+      success: false,
       message: "Internal server Error",
       data: {
         statusCode: 400,
@@ -152,7 +153,7 @@ exports.forgot = async (req, res)  => {
   
 exports.tokenreset = async(req, res) => {
   if (req.body.password === undefined || req.body.password == "") {
-    return res.status(400).json({
+    return res.status(400).render("forgotPassword", {
       success: false,
       message: "Password Can't Be Empty",
       data: {
@@ -166,7 +167,7 @@ exports.tokenreset = async(req, res) => {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } },
     function(err, user) {
       if (err) {
-        return res.status(400).json({
+        return res.status(400).render("forgotPassword", {
           success: false,
           message: "Error From DB",
           data: {
@@ -176,7 +177,7 @@ exports.tokenreset = async(req, res) => {
       });
       }
       if (!user) {
-        return res.status(400).json({
+        return res.status(400).render("forgotPassword", {
           success: false,
           message: "Password Reset Token Is Invalid or has expired",
           data: {
@@ -191,8 +192,8 @@ exports.tokenreset = async(req, res) => {
   
       user.save(function(err) {
         if (err) {
-          return res.status(400).json({
-            success: "false",
+          return res.status(400).render("forgotPassword", {
+            success: false,
             message: "Couldn't save to DB",
             data: {
               statusCode: 400,
@@ -216,7 +217,7 @@ exports.tokenreset = async(req, res) => {
         };
         smtpTransport.sendMail(mailOptions, function(err) {
           if (err) {
-            return res.status(200).json({
+            return res.status(200).render("forgotPassword", {
               success: false,
               message: "Password Changed Succesfully. But Error Sending Email Notification",
               data: {
@@ -225,7 +226,7 @@ exports.tokenreset = async(req, res) => {
             }
           });
           }
-          return res.status(200).json({
+          return res.status(200).render("forgotPassword", {
             success: true,
             message: "Email Notification Sent",
             data: {
@@ -241,4 +242,8 @@ exports.tokenreset = async(req, res) => {
     
   }
 
+};
+
+exports.render = (req, res) => {
+  return res.status(200).render("forgotPassword");
 };
