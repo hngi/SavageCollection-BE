@@ -39,7 +39,6 @@ exports.GetAllPost = (req, res, next) => {
     .select("_id image_url")
     .exec()
     .then((result) => {
-      // console.log(result[image_url]);
       res.status(200).render("index", {
         data: result,
       });
@@ -52,20 +51,29 @@ exports.GetAllPost = (req, res, next) => {
     });
 };
 
+exports.GetUserPost = (req, res, next) => {
+  UploadModel.find()
     .select()
     .exec()
     .then((results) => {
-      results.forEach((result) => {
-        console.log(result);
-      });
-      console.log(req.userData);
       let data = results.filter(
         (result) => result.userId == req.userData.userId
       );
       res.status(200).render("dashboard", {
         data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
 exports.GetPostById = (req, res, next) => {
-  UploadModel.findOne({_id: req.params._id})
+  UploadModel.findOne({ _id: req.params._id })
+    .select()
     .exec()
     .then((result) => {
       return res.status(200).json({
@@ -83,8 +91,7 @@ exports.GetPostById = (req, res, next) => {
 };
 
 exports.DeletePost = (req, res, next) => {
-  console.log('I am here');
-  UploadModel.deleteOne({_id: req.params._id})
+  UploadModel.deleteOne({ _id: req.params._id })
     .select()
     .exec()
     .then((result) => {
@@ -94,8 +101,9 @@ exports.DeletePost = (req, res, next) => {
         data: result,
       });
     })
-      console.log(err);
+    .catch((error) => {
       res.status(500).json({
+        error: err,
       });
     });
 };
