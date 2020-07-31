@@ -1,66 +1,49 @@
-const jwt = require("jsonwebtoken");
 const UserModel = require("../models/users");
-const bCrypt = require("bcrypt");
 
 exports.LoginUser = async (req, res) => {
   const { username, password } = req.body;
+  let success = false;
+  let message = "";
+
+  if (!username && !password) {
+    message = "Username And Password Is Required";
+    return res.render("login", {
+      success,
+      message,
+    });
+  }
 
   try {
-    if (!username && !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Username And Password Is Required",
-      });
-    }
     const userFound = await UserModel.findOne({ username: username });
     if (userFound) {
-      const PasswordMatch = await bCrypt.compare(password, userFound.password);
-      console.log(userFound.password);
+      const PasswordMatch = UserModel.compareHash(password);
       if (PasswordMatch) {
-        const apiToken = jwt.sign(
-          {
-            username: userFound.username,
-            password: userFound.password,
-            email: userFound.email,
-          },
-          process.env.JWT_KEY,
-          {
-            expiresIn: "2d",
-          }
-        );
-        req.flash("message", "User Logged in");
-        res.status(200).redirect("/user/dashboard");
-
-        return res.status(200).send({
-          success: true,
-          message: "Log in Succesfull",
-          data: {
-            statusCode: 200,
-            user: userFound,
-            token: apiToken,
-          },
-        });
+        const token = UserModel.signJWT();
+        res.cookie("auth", token).redirect("/user/dashboard");
       } else {
-        return res.status(400).json({
-          success: false,
-          message: "Incorrect Password",
+        message = "Incorrect Password";
+        return res.render("login", {
+          success,
+          message,
         });
       }
     } else {
-      return res.status(404).json({
-        success: false,
-        message: "User Doesn't Exist",
+      message = "User Doesn't Exist";
+      return res.render("login", {
+        success,
+        message,
       });
     }
   } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error.message,
+    message = "An Internal Error Occurred";
+    return res.render("login", {
+      success,
+      message,
     });
   }
 };
 
 exports.getLogin = (req, res) => {
   res.status(200);
-  res.render("login.ejs");
+  res.render("login");
 };

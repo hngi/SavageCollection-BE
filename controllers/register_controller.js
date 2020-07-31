@@ -3,34 +3,38 @@ const bCrypt = require("bcrypt");
 
 exports.RegisterUser = async (req, res) => {
   const { email, username, password } = req.body;
+  let success = false;
+  let message = "";
   try {
     if (!username && !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Username And Password Is Required",
+      message = "Username And Password Is Required";
+      return res.render("register", {
+        success,
+        message,
       });
-    } else {
-      let hashedPassword = await bCrypt.hash(password, 10);
-      const user = new UserModel({
-        email: email,
-        username: username,
-        password: hashedPassword,
-      });
-      await user.save();
-      req.flash("message", "User created");
-      res.status(201).redirect("/user/dashboard");
-      // return res.status(200).json({
-
-      //   succes: true,
-      //   messgae: "Registration Succesfull",
-      // });
     }
+
+    const user = new UserModel();
+    user.email = email;
+    user.username = username;
+    user.password = UserModel.hashPass(password);
+    const newUser = await user.save();
+    const token = newUser.signJWt();
+
+    console.log(newUser, token);
+
+    res.status(201).cookie("auth", token).redirect("/user/dashboard");
   } catch (error) {
-    req.flash("message", `${error}`);
+    message = "An Internal Error Occurred";
+    console.log(error);
+    res.render("register", {
+      success,
+      message,
+    });
   }
 };
 
 exports.getRegister = (req, res) => {
   res.status(200);
-  res.render("register.ejs");
+  res.render("register");
 };

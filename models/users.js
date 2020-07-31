@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
-const UserSchema = mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
     email: {
       type: String,
@@ -30,5 +32,26 @@ const UserSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+UserSchema.static("hashPass", function (password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync());
+});
+
+UserSchema.methods.compareHash = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
+UserSchema.methods.signJWt = function () {
+  return jwt.sign(
+    {
+      email: this.email,
+      username: this.username,
+    },
+    process.env.JWT_KEY,
+    {
+      expiresIn: "2d",
+    }
+  );
+};
 
 module.exports = mongoose.model("user", UserSchema);
