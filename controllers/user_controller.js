@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const UploadModel = require("../models/uploads");
+const UserModel = require("../models/users");
 
 exports.CreatePost = (req, res, next) => {
   console.log(req.file);
@@ -49,22 +50,24 @@ exports.GetAllPost = (req, res, next) => {
     });
 };
 
-exports.GetUserPost = (req, res, next) => {
-  UploadModel.find()
-    .select()
-    .exec()
-    .then(results => {
-      let data = results.filter(result => result.userId == req.userData.userId);
-      res.status(200).render("dashboard", {
-        data
-      });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
+exports.GetUserPost = async (req, res, next) => {
+  let id = req.userData.user;
+  console.log(id);
+  try {
+    let user = await UserModel.findOne({ id }).select("username email _id");
+
+    let data = await UploadModel.find({ user_id: id }).select().exec();
+
+    res.status(200).render("dashboard", {
+      data,
+      user
     });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  }
 };
 
 exports.GetPostById = (req, res, next) => {
