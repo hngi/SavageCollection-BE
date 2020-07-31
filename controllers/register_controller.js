@@ -19,7 +19,7 @@ exports.RegisterUser = async (req, res) => {
     user.username = username;
     user.password = hashPass(password);
     const newUser = await user.save();
-    const token = signJWT(user.email, user.username);
+    const token = signJWT(newUser.email, newUser.username);
 
     res.status(201).cookie("auth", token).redirect("/user/dashboard");
   } catch (error) {
