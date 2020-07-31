@@ -9,11 +9,11 @@ exports.forgot = async (req, res)  => {
       await crypto.randomBytes(20, function(err, buf) {
         let token = buf.toString('hex');
         if (err) {
-            return res.status(404).json({
+            return res.status(400).json({
                 success: "false",
                 message: "Error Occured",
                 data: {
-                    statusCode: 404,
+                    statusCode: 400,
                     error: err.message
                 }
             });
@@ -21,21 +21,21 @@ exports.forgot = async (req, res)  => {
   
       User.findOne({ username: username }, function(err, user) {
         if (err) {
-          return res.status(404).json({
+          return res.status(400).json({
             success: "false",
             message: "Error finding user in DB",
             data: {
-                statusCode: 404,
+                statusCode: 400,
                 error: err.message
             }
         });
         }
         if (!user) {
-        return res.status(404).json({
+        return res.status(400).json({
             success: "false",
             message: "User Not Found. Make sure the username is rightly spelt",
             data: {
-                statusCode: 404,
+                statusCode: 400,
                 error: "User Dosen't Exist"
             }
         });
@@ -44,11 +44,11 @@ exports.forgot = async (req, res)  => {
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
         user.save((err) => {
           if (err) {
-            return res.status(404).json({
+            return res.status(400).json({
               success: "false",
               message: "Error saving user",
               data: {
-                  statusCode: 404,
+                  statusCode: 400,
                   error: err.message
               }
           });
@@ -241,4 +241,8 @@ exports.tokenreset = async(req, res) => {
     
   }
 
+};
+
+exports.render = (req, res) => {
+  return res.status(200).render("forgotPassword");
 };

@@ -59,7 +59,7 @@ app.use(flush());
 
 //routes
 app.get("/", (req, res) => {
-  console.log(req);
+  // console.log(req);
   res.status(200).render("index", { message: req.flash("message") });
 });
 app.use(login);
