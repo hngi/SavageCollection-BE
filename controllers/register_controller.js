@@ -1,4 +1,5 @@
 const UserModel = require("../models/users");
+const { signJWT, hashPass } = require("../utils/auth");
 
 exports.RegisterUser = async (req, res) => {
   const { email, username, password } = req.body;
@@ -16,9 +17,9 @@ exports.RegisterUser = async (req, res) => {
     const user = new UserModel();
     user.email = email;
     user.username = username;
-    user.password = UserModel.hashPass(password);
+    user.password = hashPass(password);
     const newUser = await user.save();
-    const token = newUser.signJWt();
+    const token = signJWT(user.email, user.username);
 
     res.status(201).cookie("auth", token).redirect("/user/dashboard");
   } catch (error) {

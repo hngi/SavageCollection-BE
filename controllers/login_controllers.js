@@ -1,4 +1,5 @@
 const UserModel = require("../models/users");
+const { comparePass, signJWT } = require("../utils/auth");
 
 exports.LoginUser = async (req, res) => {
   const { username, password } = req.body;
@@ -16,9 +17,9 @@ exports.LoginUser = async (req, res) => {
   try {
     const userFound = await UserModel.findOne({ username: username });
     if (userFound) {
-      const PasswordMatch = UserModel.compareHash(password);
+      const PasswordMatch = comparePass(password, userFound.password);
       if (PasswordMatch) {
-        const token = UserModel.signJWT();
+        const token = signJWT(userFound.email, userFound.username);
         res.cookie("auth", token).redirect("/user/dashboard");
       } else {
         message = "Incorrect Password";
