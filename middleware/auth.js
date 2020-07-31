@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
+const UserModel = require("../models/users");
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
   //to decode and validate the token
   try {
     // const token =
@@ -8,11 +9,10 @@ module.exports = (req, res, next) => {
     const token = req.cookies.auth;
     console.log(token);
     const decoded = jwt.verify(token, process.env.JWT_KEY);
-    req.userData = decoded;
+    let user = await UserModel.findOne({ username: decoded.username });
+    req.userData = user;
     next();
   } catch (error) {
-    return res.status(401).json({
-      message: "Auth failed",
-    });
+    return res.status(401).redirect("/user/login");
   }
 };
