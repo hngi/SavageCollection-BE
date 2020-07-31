@@ -11,9 +11,7 @@ exports.CreatePost = (req, res, next) => {
     });
   }
   //new instance of the model to store data
-
   const uploadModel = new UploadModel({
-    //data for the model
     _id: new mongoose.Types.ObjectId(),
     title: req.body.title,
     text: req.body.text,
