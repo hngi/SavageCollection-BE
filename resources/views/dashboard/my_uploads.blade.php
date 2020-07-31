@@ -43,7 +43,7 @@
                                     @foreach ($user_uploads as $data)
                                         @if ($data->type == 'image')
                                             <div class="mb-3 col-lg-4 col-md-4">
-                                                <img data-src="{{ asset('uploads/memes/'.$data->image) }}" class="lazy img-responsive meme_size">
+                                                <img data-src="{{ $data->image }}" class="lazy img-responsive meme_size">
                                             </div>
                                         @else
                                             <div class="mb-3 col-lg-4 col-md-4">
