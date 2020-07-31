@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
 
 exports.forgot = async (req, res)  => {
     const {username} = req.body;
-    await crypto.randomBytes(20, function(err, buf) {
+    try {
+      await crypto.randomBytes(20, function(err, buf) {
         let token = buf.toString('hex');
         if (err) {
             return res.status(404).json({
@@ -134,20 +135,33 @@ exports.forgot = async (req, res)  => {
   
   
   
-});
+  });
+    } 
+  catch (error) {
+    return res.status(500).json({
+      success: "false",
+      message: "Internal server Error",
+      data: {
+        statusCode: 400,
+        error: error.message
+      }
+    });      
+  }
+
 };
   
 exports.tokenreset = async(req, res) => {
-    if (req.body.password === undefined || req.body.password == "") {
-      return res.status(400).json({
-        success: false,
-        message: "Password Can't Be Empty",
-        data: {
-          statusCode: 400,
-          error: "password is required"
+  if (req.body.password === undefined || req.body.password == "") {
+    return res.status(400).json({
+      success: false,
+      message: "Password Can't Be Empty",
+      data: {
+        statusCode: 400,
+        error: "password is required"
       }
     });
-    }
+  }
+  try {
     const password = await bcrypt.hash(req.body.password, 10);
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } },
     function(err, user) {
@@ -171,7 +185,7 @@ exports.tokenreset = async(req, res) => {
         }
       });
     }
-      user.local.password = password;
+      user.password = password;
       user.resetPasswordToken = undefined; //turn reset password to something not needed
       user.resetPasswordExpires = undefined;
   
@@ -222,5 +236,9 @@ exports.tokenreset = async(req, res) => {
       });
   
       });
-    });
+    });    
+  } catch (error) {
+    
+  }
+
 };
