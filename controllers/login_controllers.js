@@ -13,14 +13,15 @@ exports.LoginUser = async (req, res) => {
       });
     }
     const userFound = await UserModel.findOne({ username: username });
+    console.log(userFound._id);
     if (userFound) {
       const PasswordMatch = await bCrypt.compare(password, userFound.password);
       console.log(userFound.password);
       if (PasswordMatch) {
         const apiToken = jwt.sign(
           {
+            userId: userFound._id,
             username: userFound.username,
-            password: userFound.password,
             email: userFound.email,
           },
           process.env.JWT_KEY,
@@ -28,18 +29,10 @@ exports.LoginUser = async (req, res) => {
             expiresIn: "2d",
           }
         );
-        req.flash("message", "User Logged in");
-        res.status(200).redirect("/user/dashboard");
+        res.cookie("auth", apiToken);
+        // req.flash("message", "User Logged in");
 
-        return res.status(200).send({
-          success: true,
-          message: "Log in Succesfull",
-          data: {
-            statusCode: 200,
-            user: userFound,
-            token: apiToken,
-          },
-        });
+        res.status(200).redirect("/post");
       } else {
         return res.status(400).json({
           success: false,

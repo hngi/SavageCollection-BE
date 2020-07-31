@@ -4,7 +4,6 @@ const UploadSchema = mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
     },
     image_url: {
       type: String,
@@ -20,7 +19,7 @@ const UploadSchema = mongoose.Schema(
       type: Number,
       default: 1,
     },
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },

@@ -16,10 +16,10 @@ main {
 }
 
 .user-box {
-  width: 500px;
+  width: 400px;
   text-align: center;
   border: 1px solid #262b48;
-  padding: 2rem 4rem;
+  padding: 1.5rem 2.5rem;
   border-radius: 5px;
   -webkit-box-shadow: 2px 4px 7px -4px rgba(0, 0, 0, 0.48);
   -moz-box-shadow: 2px 4px 7px -4px rgba(0, 0, 0, 0.48);
@@ -31,7 +31,7 @@ main {
   margin-bottom: 1rem;
 }
 .user-photo img {
-  width: 100%;
+  width: 200px;
   border-radius: 50%;
   border: 1px solid #262b48;
 }
