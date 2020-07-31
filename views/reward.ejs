@@ -20,9 +20,9 @@
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/header.css">
-  <link rel="stylesheet" href="assets/css/footer.css">
-  <link rel="stylesheet" href="assets/css/savage.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/savage.css">
 
 
   <title>Savage</title>
@@ -30,38 +30,11 @@
 
 <body>
   <!-- Header -->
-  <!-- <header class="bg-white fixed-top">
-    <nav class="navbar navbar-expand-xl navbar-light py-3">
-      <a class="navbar-brand" href="index.html">
-        <h3>Savage</h3>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto w-100 justify-content-end">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="course.html">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link current" href="#">Rewards<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link nav-btn btn btn-outline px-4" href="SignOut.html">Sign Out</button>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header> -->
   <div id="wrapper">
     <header class="mb-3">
       <nav id="navi" class="navbar navbar-expand-md navbar-dark  shadow-lg py-3">
         <!-- Brand -->
-        <a class="navbar-brand text-uppercase" id="logo" href="#">sc</a>
+        <a class="navbar-brand text-uppercase" id="logo" href="/">sc</a>
 
         <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -72,19 +45,16 @@
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link text-uppercase text-light" href="index.ejs">home</a>
+              <a class="nav-link text-uppercase text-light" href="/">home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-uppercase text-light" href="dashboard.ejs">dashboard</a>
+              <a class="nav-link text-uppercase text-light" href="/dashboard">dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-uppercase text-light" href="review.ejs">views</a>
+              <a class="nav-link text-uppercase text-light" href="/posts">views</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-uppercase text-light" href="reward.ejs">reward</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-uppercase text-light" href="logout.ejs">log out</a>
+              <a class="nav-link text-uppercase text-light" href="/user/logout">log out</a>
             </li>
           </ul>
         </div>

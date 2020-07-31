@@ -7,7 +7,6 @@ module.exports = async (req, res, next) => {
     // const token =
     //   req.body.token || req.query.token || req.headers["x-access-token"];
     const token = req.cookies.auth;
-    console.log(token);
     const decoded = jwt.verify(token, process.env.JWT_KEY);
     let user = await UserModel.findOne({ username: decoded.username });
     req.userData = user;
