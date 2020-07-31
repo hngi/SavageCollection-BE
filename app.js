@@ -10,6 +10,7 @@ require("dotenv").config();
 const { MONGO_URI } = process.env;
 const session = require("express-session");
 const flush = require("connect-flash");
+const flash = require('express-flash');
 
 const login = require("./routes/login");
 const register = require("./routes/register");
@@ -19,6 +20,8 @@ const dashboard = require("./routes/dashboard");
 
 const app = express();
 app.use(cors());
+
+app.use(flash());
 
 //database code
 mongoose
@@ -60,7 +63,9 @@ app.use(flush());
 //routes
 app.get("/", (req, res) => {
   // console.log(req);
-  res.status(200).render("index", { message: req.flash("message") });
+  req.flash('success', 'This is a flash message using the express-flash module.');
+  let message = "juwon";
+  res.status(200).render("index", {message: message});
 });
 app.use(login);
 app.use(register);
