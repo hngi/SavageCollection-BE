@@ -30,7 +30,7 @@
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top shadow-lg py-3">
         <!-- Brand -->
-        <a class="navbar-brand" id="logo" href="./index.html">SC</a>
+        <a class="navbar-brand" id="logo" href="/">SC</a>
 
         <!-- Toggler/collapsibe Button -->
         <button
@@ -52,13 +52,6 @@
               <a class="nav-link text-uppercase text-light" href="/">home</a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link text-uppercase text-light"
-                href="/user/dashboard"
-                >dashboard</a
-              >
-            </li>
-            <li class="nav-item">
               <a class="nav-link text-uppercase text-light" href="#upload"
                 >upload</a
               >
@@ -69,7 +62,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link text-uppercase text-light" href="/rewards"
+              <a class="nav-link text-uppercase text-light" href="/reward"
                 >reward</a
               >
             </li>
@@ -102,7 +95,7 @@
             </p>
           </div>
           <div class="user-reward">
-            <a href="/rewards">
+            <a href="/reward">
               <button class="user-btn">claim reward</button></a
             >
           </div>
@@ -132,16 +125,22 @@
       <div class="user-posts">
         <h1 class="heading text-uppercase text-center">your posts</h1>
         <div class="posts">
-          <% for (var i = 0; i < data.length; i++) { %> <% if(data[i].image_url
-          != "") { %> <% console.log(data[i].image_url) %>
+          <% for (var i = 0; i < data.length; i++) { %> <%
+          if(data[i].image_url != "") { %> <% console.log(data[i].image_url)
+          %>
           <div class="post">
-            <img src="<%= data[i].image_url %>" height="250px" width="100px" />
+            <img
+              src="<%= data[i].image_url %>"
+              height="250px"
+              width="100px"
+            />
             <div class="overlay">
               <i class="fa fa-info" title="details"></i>
               <i class="fa fa-trash" title="delete"></i>
             </div>
           </div>
           <% } %> <% } %>
+        </div>
         </div>
       </div>
       <br />

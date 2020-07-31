@@ -8,27 +8,25 @@ exports.CreatePost = (req, res, next) => {
   if (!req.file) {
     console.log("No file received");
     return res.send({
-      success: false
+      success: false,
     });
   }
   //new instance of the model to store data
   const uploadModel = new UploadModel({
     _id: new mongoose.Types.ObjectId(),
-    title: req.body.title,
-    text: req.body.text,
-    type: req.body.type,
     image_url: req.file.path,
-    userId: req.userData.userId
+    userId: req.userData._id,
   });
   uploadModel
     .save()
-    .then(result => {
-      res.status(201).redirect("/post");
+    .then((result) => {
+      console.log(result);
+      res.status(201).redirect("/dashboard");
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json({
-        error: err
+        error: err,
       });
     });
 };
@@ -37,15 +35,15 @@ exports.GetAllPost = (req, res, next) => {
   UploadModel.find()
     .select("_id image_url")
     .exec()
-    .then(results => {
+    .then((results) => {
       res.status(200).render("views", {
-        data: results
+        data: results,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json({
-        error: err
+        error: err,
       });
     });
 };
@@ -60,12 +58,12 @@ exports.GetUserPost = async (req, res, next) => {
 
     res.status(200).render("dashboard", {
       data,
-      user
+      user,
     });
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      error: err
+      error: err,
     });
   }
 };
@@ -74,17 +72,17 @@ exports.GetPostById = (req, res, next) => {
   UploadModel.findOne({ _id: req.params._id })
     .select()
     .exec()
-    .then(result => {
+    .then((result) => {
       return res.status(200).json({
         success: true,
         message: "Successfully retrieved post",
-        data: result
+        data: result,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json({
-        error: err
+        error: err,
       });
     });
 };
@@ -93,16 +91,16 @@ exports.DeletePost = (req, res, next) => {
   UploadModel.deleteOne({ _id: req.params._id })
     .select()
     .exec()
-    .then(result => {
+    .then((result) => {
       return res.status(200).json({
         success: true,
         message: "Successfully deleted post",
-        data: result
+        data: result,
       });
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).json({
-        error: err
+        error: err,
       });
     });
 };

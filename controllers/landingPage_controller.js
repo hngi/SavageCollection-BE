@@ -6,9 +6,15 @@ exports.GetAllPost = (req, res, next) => {
     .select("_id image_url")
     .exec()
     .then((result) => {
-      // console.log(result[image_url]);
+      let data = [];
+
+      result.forEach((entry, index) => {
+        if (index < 30) {
+          data.push(entry);
+        }
+      });
       res.status(200).render("index", {
-        data: result,
+        data,
       });
     })
     .catch((err) => {
