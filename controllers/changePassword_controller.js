@@ -74,7 +74,7 @@ exports.forgot = async (req, res)  => {
               if (err) {
                 return res.status(400).render("forgotPassword", {
                   success: false,
-                  message: "Error sending email.Possibly User has no email",
+                  message: "Error sending email ",
                   data: {
                       statusCode: 400,
                       error: err.message
@@ -152,8 +152,9 @@ exports.forgot = async (req, res)  => {
 };
   
 exports.tokenreset = async(req, res) => {
+  let token = req.params.token;
   if (req.body.password === undefined || req.body.password == "") {
-    return res.status(400).render("forgotPassword", {
+    return res.status(400).render("forgotPassToken", {
       success: false,
       message: "Password Can't Be Empty",
       data: {
@@ -167,7 +168,8 @@ exports.tokenreset = async(req, res) => {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } },
     function(err, user) {
       if (err) {
-        return res.status(400).render("forgotPassword", {
+        return res.status(400).render("forgotPassToken", {
+          token: token,
           success: false,
           message: "Error From DB",
           data: {
@@ -177,7 +179,8 @@ exports.tokenreset = async(req, res) => {
       });
       }
       if (!user) {
-        return res.status(400).render("forgotPassword", {
+        return res.status(400).render("forgotPassToken", {
+          token: token,
           success: false,
           message: "Password Reset Token Is Invalid or has expired",
           data: {
@@ -192,7 +195,8 @@ exports.tokenreset = async(req, res) => {
   
       user.save(function(err) {
         if (err) {
-          return res.status(400).render("forgotPassword", {
+          return res.status(400).render("forgotPassToken", {
+            token: token,
             success: false,
             message: "Couldn't save to DB",
             data: {
@@ -217,7 +221,8 @@ exports.tokenreset = async(req, res) => {
         };
         smtpTransport.sendMail(mailOptions, function(err) {
           if (err) {
-            return res.status(200).render("forgotPassword", {
+            return res.status(200).render("forgotPassToken", {
+              token: token,
               success: false,
               message: "Password Changed Succesfully. But Error Sending Email Notification",
               data: {
@@ -226,7 +231,8 @@ exports.tokenreset = async(req, res) => {
             }
           });
           }
-          return res.status(200).render("forgotPassword", {
+          return res.status(200).render("forgotPassToken", {
+            token: token,
             success: true,
             message: "Email Notification Sent",
             data: {
@@ -246,4 +252,11 @@ exports.tokenreset = async(req, res) => {
 
 exports.render = (req, res) => {
   return res.status(200).render("forgotPassword");
+};
+
+exports.renderToken = (req, res) => {
+  let token = req.params.token;
+  return res.status(200).render("forgotPassToken", {
+    token: token
+  });
 };
