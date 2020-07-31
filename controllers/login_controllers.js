@@ -15,6 +15,7 @@ exports.LoginUser = async (req, res) => {
 
   try {
     const userFound = await UserModel.findOne({ username: username });
+    console.log(userFound._id);
     if (userFound) {
       const PasswordMatch = UserModel.compareHash(password);
       if (PasswordMatch) {

@@ -2,30 +2,27 @@ const mongoose = require("mongoose");
 const UploadModel = require("../models/uploads");
 
 exports.CreatePost = (req, res, next) => {
-  if(!req.body.title){
-    return res.status(400).json({
+  console.log(req.file);
+  console.log(req.body, req.body);
+  if (!req.file) {
+    console.log("No file received");
+    return res.send({
       success: false,
-      message: "Please provided the needed parameters"
-    })
+    });
   }
   //new instance of the model to store data
   const uploadModel = new UploadModel({
-    //data for the model
     _id: new mongoose.Types.ObjectId(),
     title: req.body.title,
     text: req.body.text,
     type: req.body.type,
     image_url: req.file.path,
-    user: req.userData.user_id,
+    userId: req.userData.userId,
   });
   uploadModel
     .save()
     .then((result) => {
-      res.status(201).json({
-        success: true,
-        message: "Post created",
-        post: result,
-      });
+      res.status(201).redirect("/post");
     })
     .catch((err) => {
       console.log(err);
@@ -37,12 +34,10 @@ exports.CreatePost = (req, res, next) => {
 
 exports.GetAllPost = (req, res, next) => {
   UploadModel.find()
-    .select()
+    .select("_id image_url")
     .exec()
     .then((result) => {
-      return res.status(200).json({
-        success: true,
-        message: "Successfully retrieved posts",
+      res.status(200).render("index", {
         data: result,
       });
     })
@@ -54,9 +49,28 @@ exports.GetAllPost = (req, res, next) => {
     });
 };
 
+exports.GetUserPost = (req, res, next) => {
+  UploadModel.find()
+    .select()
+    .exec()
+    .then((results) => {
+      let data = results.filter(
+        (result) => result.userId == req.userData.userId
+      );
+      res.status(200).render("dashboard", {
+        data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
 exports.GetPostById = (req, res, next) => {
-  console.log('I am here');
-  UploadModel.findOne({_id: req.params._id})
+  UploadModel.findOne({ _id: req.params._id })
     .select()
     .exec()
     .then((result) => {
@@ -75,8 +89,7 @@ exports.GetPostById = (req, res, next) => {
 };
 
 exports.DeletePost = (req, res, next) => {
-  console.log('I am here');
-  UploadModel.deleteOne({_id: req.params._id})
+  UploadModel.deleteOne({ _id: req.params._id })
     .select()
     .exec()
     .then((result) => {
@@ -86,8 +99,7 @@ exports.DeletePost = (req, res, next) => {
         data: result,
       });
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
       res.status(500).json({
         error: err,
       });
