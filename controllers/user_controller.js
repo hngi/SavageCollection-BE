@@ -7,7 +7,7 @@ exports.CreatePost = (req, res, next) => {
   if (!req.file) {
     console.log("No file received");
     return res.send({
-      success: false,
+      success: false
     });
   }
   //new instance of the model to store data
@@ -17,17 +17,17 @@ exports.CreatePost = (req, res, next) => {
     text: req.body.text,
     type: req.body.type,
     image_url: req.file.path,
-    userId: req.userData.userId,
+    userId: req.userData.userId
   });
   uploadModel
     .save()
-    .then((result) => {
+    .then(result => {
       res.status(201).redirect("/post");
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json({
-        error: err,
+        error: err
       });
     });
 };
@@ -36,15 +36,15 @@ exports.GetAllPost = (req, res, next) => {
   UploadModel.find()
     .select("_id image_url")
     .exec()
-    .then((result) => {
-      res.status(200).render("index", {
-        data: result,
+    .then(results => {
+      res.status(200).render("views", {
+        data: results
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json({
-        error: err,
+        error: err
       });
     });
 };
@@ -53,18 +53,16 @@ exports.GetUserPost = (req, res, next) => {
   UploadModel.find()
     .select()
     .exec()
-    .then((results) => {
-      let data = results.filter(
-        (result) => result.userId == req.userData.userId
-      );
+    .then(results => {
+      let data = results.filter(result => result.userId == req.userData.userId);
       res.status(200).render("dashboard", {
-        data,
+        data
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json({
-        error: err,
+        error: err
       });
     });
 };
@@ -73,17 +71,17 @@ exports.GetPostById = (req, res, next) => {
   UploadModel.findOne({ _id: req.params._id })
     .select()
     .exec()
-    .then((result) => {
+    .then(result => {
       return res.status(200).json({
         success: true,
         message: "Successfully retrieved post",
-        data: result,
+        data: result
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json({
-        error: err,
+        error: err
       });
     });
 };
@@ -92,16 +90,16 @@ exports.DeletePost = (req, res, next) => {
   UploadModel.deleteOne({ _id: req.params._id })
     .select()
     .exec()
-    .then((result) => {
+    .then(result => {
       return res.status(200).json({
         success: true,
         message: "Successfully deleted post",
-        data: result,
+        data: result
       });
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(500).json({
-        error: err,
+        error: err
       });
     });
 };
