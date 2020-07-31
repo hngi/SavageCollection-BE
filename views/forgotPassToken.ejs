@@ -35,19 +35,24 @@
             <div class="text-center mb-5">
               <% if ( typeof success === "undefined" ) { %>
                   <p></p>
+                  <div class="form-group">
+                    <label for="email" class="sr-only">Password</label>
+                    <input name="password" type="password" class="form-control" id="password aria-describedby="emailHelp" placeholder="Password">
+                  </div>
+                  <button type="submit" class="btn btn-lg btn-primary my-4">Submit</button>
               <% } else if ( success === true ) { %>
                 <h4 style="color: green;">Succesful</h4>
                 <p><%= message %> <%= data.message %> </p>
               <% } else if ( success === false ) { %>
                 <h4 style="color: red;">Error</h4>
                 <p><%= message %> <%= data.error %> </p>
+                <div class="form-group">
+                    <label for="email" class="sr-only">Password</label>
+                    <input name="password" type="password" class="form-control" id="password aria-describedby="emailHelp" placeholder="Password">
+                  </div>
+                  <button type="submit" class="btn btn-lg btn-primary my-4">Submit</button>
               <% } %>
             </div>
-            <div class="form-group">
-              <label for="email" class="sr-only">Password</label>
-              <input name="password" type="password" class="form-control" id="password aria-describedby="emailHelp" placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-lg btn-primary my-4">Submit</button>
             <div class="text-center">
               <a href="/">
                 <i class="fas fa-chevron-left"></i> &nbsp Back to Home

@@ -217,7 +217,7 @@ exports.tokenreset = async(req, res) => {
           from: 'admin@savagecollection.com',
           subject: 'Your SavageCollection Account password has been changed',
           text: 'Hello,\n\n' +
-            'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+            'This is a confirmation that the password for your account with the username ' + user.username + ' has just been changed.\n'
         };
         smtpTransport.sendMail(mailOptions, function(err) {
           if (err) {
