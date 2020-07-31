@@ -1,3 +1,4 @@
+const http = require("http");
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -97,4 +98,12 @@ app.use(function (err, req, res, next) {
   });
 });
 
-module.exports = app;
+const port = process.env.PORT || 3000;
+
+const server = http.createServer(app);
+
+server.listen(port, () => {
+  console.log("listening on port " + port);
+});
+
+// module.exports = app;

@@ -52,8 +52,6 @@ exports.GetAllPost = (req, res, next) => {
     });
 };
 
-exports.GetUserPost = (req, res, next) => {
-  UploadModel.find()
     .select()
     .exec()
     .then((results) => {
@@ -66,12 +64,38 @@ exports.GetUserPost = (req, res, next) => {
       );
       res.status(200).render("dashboard", {
         data,
+exports.GetPostById = (req, res, next) => {
+  UploadModel.findOne({_id: req.params._id})
+    .exec()
+    .then((result) => {
+      return res.status(200).json({
+        success: true,
+        message: "Successfully retrieved post",
+        data: result,
       });
     })
     .catch((err) => {
       console.log(err);
       res.status(500).json({
         error: err,
+      });
+    });
+};
+
+exports.DeletePost = (req, res, next) => {
+  console.log('I am here');
+  UploadModel.deleteOne({_id: req.params._id})
+    .select()
+    .exec()
+    .then((result) => {
+      return res.status(200).json({
+        success: true,
+        message: "Successfully deleted post",
+        data: result,
+      });
+    })
+      console.log(err);
+      res.status(500).json({
       });
     });
 };
