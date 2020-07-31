@@ -20,8 +20,6 @@ exports.RegisterUser = async (req, res) => {
     const newUser = await user.save();
     const token = newUser.signJWt();
 
-    console.log(newUser, token);
-
     res.status(201).cookie("auth", token).redirect("/user/dashboard");
   } catch (error) {
     message = "An Internal Error Occurred";
