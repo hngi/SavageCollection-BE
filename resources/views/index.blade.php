@@ -16,7 +16,7 @@
                         <h1>Savage Collector</h1>
                         <h3>FUNNY, SAVAGE REPLIES</h3>
                         <hr />
-                        <button class="btn btn-danger btn-lg"><i class="fa fa-paw"></i> See Savages</button>
+                        <a href="{{ url('/all_post') }}"><button class="btn btn-danger btn-lg"><i class="fa fa-paw"></i> See Savages</button></a>
                     </div>
                 </div>
             </div>

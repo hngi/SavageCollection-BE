@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Upload;
+
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
@@ -41,8 +46,53 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function processNewUpload()
+    public function myUploads()
     {
-        // Write th logic from here
+        return view('dashboard.my_uploads');
+    }
+
+    public function newImageUpload(Request $request)
+    {
+        Validator::make($request->all(), [
+            'title' => 'sometimes|max:255',
+            'meme_image' => 'required|image|max:1024',
+        ])->validate();
+
+        // Capture Files for upload
+        $meme_image = $request->file('meme_image');
+        // Generate Random Name
+        $save_as_name_meme_image = Str::random(35) . "." . $meme_image->getClientOriginalExtension();
+        // Set Folder to move file
+        $upload_path_meme_image = public_path().'/uploads/memes';
+        // Move File
+        $move_meme_image = $meme_image->move( $upload_path_meme_image, $save_as_name_meme_image );
+
+        $upload = Upload::create([
+            'user_id' => Auth::user()->id,
+            'title' => $request['title'] != "" ? $request['title'] : Str::random(50),
+            'type' => 'image',
+            'points' => '1',
+            'image' => $save_as_name_meme_image,
+        ]);
+
+        return redirect()->back()->with('success', 'Upload Successful ✔');
+    }
+
+    public function newTextUpload(Request $request)
+    {
+        Validator::make($request->all(), [
+            'title' => 'sometimes|max:255',
+            'meme_text' => 'required|string|max:255',
+        ])->validate();
+
+        $upload = Upload::create([
+            'user_id' => Auth::user()->id,
+            'title' => $request['title'] != "" ? $request['title'] : Str::random(50),
+            'type' => 'text',
+            'points' => '1',
+            'text' => $request['meme_text'],
+        ]);
+
+        return redirect()->back()->with('success', 'Upload Successful ✔');
     }
 }

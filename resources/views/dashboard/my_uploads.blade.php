@@ -30,33 +30,36 @@
                         </header>
                     </div>
 
+                    @php $user_uploads = App\Upload::where('user_id', Auth::user()->id)->get() @endphp
+                    @php $user_uploads_count = count($user_uploads) @endphp
+
                     <div class="user-dashboard">
                         <h1>Hello, {{ Auth::user()->username }}</h1>
 
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card-counter primary">
-                                    <i class="fa fa-code-fork"></i>
-                                    <span class="count-numbers">{{ App\Upload::where('user_id', Auth::user()->id)->count() }}</span>
-                                    <span class="count-name">Uploads</span>
-                                </div>
-                            </div>
+                        <div class="container mt-5">
 
-                            <div class="col-md-4">
-                                <div class="card-counter danger">
-                                    <i class="fa fa-ticket"></i>
-                                    <span class="count-numbers">{{ App\Upload::where('user_id', Auth::user()->id)->count() * 3 }}</span>
-                                    <span class="count-name">Points</span>
+                            @if ($user_uploads_count > 0)
+                                <div class="row">
+                                    @foreach ($user_uploads as $data)
+                                        @if ($data->type == 'image')
+                                            <div class="mb-3 col-lg-4 col-md-4">
+                                                <img data-src="{{ asset('uploads/memes/'.$data->image) }}" class="lazy img-responsive meme_size">
+                                            </div>
+                                        @else
+                                            <div class="mb-3 col-lg-4 col-md-4">
+                                                <div class="card text_meme">
+                                                <div class="card-body text-center">
+                                                    <h2 class="card-text text-dark">{{ $data->text }}</h2>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
-                            </div>
+                            @else
+                                <div class="alert alert-warning">You haven't uploaded any post :(</div>
+                            @endif
 
-                            <div class="col-md-4">
-                                <div class="card-counter success">
-                                    <i class="fa fa-database"></i>
-                                    <span class="count-numbers">₦ {{ App\Upload::where('user_id', Auth::user()->id)->count() * 0.035 }}</span>
-                                    <span class="count-name">Cash Equivalent</span>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
