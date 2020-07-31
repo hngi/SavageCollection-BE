@@ -10,6 +10,7 @@ require("dotenv").config();
 const { MONGO_URI } = process.env;
 const session = require("express-session");
 const flush = require("connect-flash");
+const flash = require('express-flash');
 
 const login = require("./routes/login");
 const register = require("./routes/register");
@@ -21,6 +22,8 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(cors());
+
+app.use(flash());
 
 //database code
 mongoose
