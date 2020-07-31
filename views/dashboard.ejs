@@ -68,12 +68,12 @@
           </div>
           <div class="user-details">
             <p class="user-name">
-              <span class="first">John</span>
-              <span class="last">Doe</span>
+              <span class="first"><%= user.username %></span>
             </p>
-            <p class="user-id">ID: <span class="id">12345</span></p>
+            <%= user.email %>
+            <p class="user-id">ID: <span class="id"><%= user._id %></span></p>
             <p class="user-email">
-              Email: <span class="email">johndoe@email.com</span>
+              Email: <span class="email"><%= user.email %> </span>
             </p>
           </div>
           <div class="user-reward">
