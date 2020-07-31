@@ -12,6 +12,16 @@
 	box-sizing: border-box;
 }
 
+header #navi .nav-link {
+	color: #fff !important;
+	font-weight: normal;
+	font-size: 16px;
+}
+
+#logo {
+	font-weight: normal;
+}
+
 body {
 	font-family: var(--font-stack);
 	color: #000;
@@ -44,6 +54,10 @@ h2 {
 
 h3 {
 	font-size: 32px;
+}
+
+.current {
+	text-decoration: underline;
 }
 
 /* ==========================================================================================
@@ -86,7 +100,7 @@ header {
 	font-size: 18px;
 }
 
-header nav .current {
+header .navbar-dark .navbar-nav .current {
 	border-bottom: 2px solid var(--base-color);
 }
 
@@ -103,9 +117,6 @@ header .nav-btn.btn-outline-light:hover {
 	color: var(--base-color) !important;
 }
 
-header nav .nav-item {
-	margin-right: 1.3rem;
-}
 
 header .btn-outline {
 	border: 2px solid var(--primary-color) !important;
@@ -200,6 +211,9 @@ button:hover {
 footer p {
 	color: #fff;
 	opacity: 0.9;
+	font-size: 16px;
+	font-weight: normal;
+	font-family: 'Lato', serif;
 }
 
 /* ==========================================================================================
@@ -211,6 +225,9 @@ footer p {
 		margin-top: 1rem !important;
 	}
 }
+
+/* To Combat the issue of overflowing header,for conformity */
+
 
 @media (max-width: 1000px) {
 	#first {

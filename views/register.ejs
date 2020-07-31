@@ -42,6 +42,11 @@
         <div class="col-lg-7 form">
           <div class="text-center mb-5">
             <h4>Sign up for free!</h4>
+            <% if (typeof success === "boolean" && !success) { %>
+            <small class="text-left" style="color: red;">
+              <%= message %>
+            </small>
+            <% } %>
           </div>
 
           <form
