@@ -11,6 +11,7 @@ const storage = multer.diskStorage({
     cb(null, "./uploads");
   },
   filename: (req, file, cb) => {
+    console.log(file);
     //cb() specifies potential error , and the original file name
     cb(null, file.originalname);
   },
@@ -34,6 +35,7 @@ const upload = multer({
 });
 
 router.post("/post/create", auth, upload.single("image"), user.CreatePost);
+router.get("/post", auth, user.GetUserPost);
 router.get("/posts", user.GetAllPost);
 
 module.exports = router;

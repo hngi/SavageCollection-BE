@@ -15,6 +15,7 @@ const register = require("./routes/register");
 const user = require("./routes/users");
 const changePassword = require("./routes/changePassword");
 const dashboard = require("./routes/dashboard");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(cors());
@@ -46,6 +47,8 @@ app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(cookieParser());
+
 app.use(
   session({
     secret: "secret",
@@ -58,7 +61,7 @@ app.use(flush());
 
 //routes
 app.get("/", (req, res) => {
-  res.status(200).render("index", { message: req.flash("message") });
+  res.status(200).redirect("/posts");
 });
 app.use(login);
 app.use(register);

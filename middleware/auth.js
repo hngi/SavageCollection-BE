@@ -3,8 +3,9 @@ const jwt = require("jsonwebtoken");
 module.exports = (req, res, next) => {
   //to decode and validate the token
   try {
-    const token =
-      req.body.token || req.query.token || req.headers["x-access-token"];
+    // const token =
+    //   req.body.token || req.query.token || req.headers["x-access-token"];
+    const token = req.cookies.auth;
     console.log(token);
     const decoded = jwt.verify(token, process.env.JWT_KEY);
     req.userData = decoded;
