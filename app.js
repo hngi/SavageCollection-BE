@@ -17,6 +17,7 @@ const register = require("./routes/register");
 const user = require("./routes/users");
 const changePassword = require("./routes/changePassword");
 const dashboard = require("./routes/dashboard");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(cors());
@@ -50,6 +51,8 @@ app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(cookieParser());
+
 app.use(
   session({
     secret: "secret",
@@ -62,10 +65,7 @@ app.use(flush());
 
 //routes
 app.get("/", (req, res) => {
-  // console.log(req);
-  req.flash('success', 'This is a flash message using the express-flash module.');
-  let message = "juwon";
-  res.status(200).render("index", {message: message});
+  res.status(200).redirect("/posts");
 });
 app.use(login);
 app.use(register);
@@ -108,6 +108,5 @@ const server = http.createServer(app);
 server.listen(port, () => {
   console.log("listening on port " + port);
 });
-
 
 // module.exports = app;
