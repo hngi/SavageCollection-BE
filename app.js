@@ -31,15 +31,15 @@ mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
+    useCreateIndex: true
   })
-  .catch((err) => console.error(err));
+  .catch(err => console.error(err));
 mongoose.Promise = global.Promise;
 mongoose.connection
   .on("connected", () => {
     console.log("mongoose connection open");
   })
-  .on("error", (error) => {
+  .on("error", error => {
     console.log(`connection error ${error.message}`);
   });
 
@@ -60,7 +60,7 @@ app.use(
     secret: "secret",
     cookie: { maxAge: 30000 },
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false
   })
 );
 
@@ -81,6 +81,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/css", express.static(path.join(__dirname, "/public/stylesheets")));
+app.use("/js", express.static(path.join(__dirname, "/public/javascripts")));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -97,7 +99,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    error: err,
+    error: err
   });
 });
 
