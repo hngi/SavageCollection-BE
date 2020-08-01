@@ -4,8 +4,7 @@ const User = require('../models/users');
 const bcrypt = require('bcrypt');
 
 exports.forgot = async (req, res)  => {
-    console.log("gmail user", process.env.GMAIL_USER);
-    console.log("gmail pass", process.env.GMAIL_PASS);
+
     // console.log("body", req.body)
     const {email} = req.body;
     try {
