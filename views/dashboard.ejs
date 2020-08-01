@@ -124,23 +124,30 @@
       </div>
       <div class="user-posts">
         <h1 class="heading text-uppercase text-center">your posts</h1>
+
         <div class="posts">
-          <% for (var i = 0; i < data.length; i++) { %> <%
-          if(data[i].image_url != "") { %> <% console.log(data[i].image_url)
-          %>
-          <div class="post">
-            <img
-              src="<%= data[i].image_url %>"
-              height="250px"
-              width="100px"
-            />
-            <div class="overlay">
-              <i class="fa fa-info" title="details"></i>
-              <i class="fa fa-trash" title="delete"></i>
+          <div class="row">
+            <% for (var i = 0; i < data.length; i++) { %>
+            <div class="col-sm-12 col-md-2 col-lg-3">
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <div class="post">
+                    <img
+                      src="<%= data[i].image_url %>"
+                      height="250px"
+                      width="100px"
+                    />
+                  </div>
+                  <div class="overlay">
+                    <a href="/post/<%= data[i]._id %>/delete">
+                      <i class="fa fa-trash" title="delete"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
+            <% } %>
           </div>
-          <% } %> <% } %>
-        </div>
         </div>
       </div>
       <br />
