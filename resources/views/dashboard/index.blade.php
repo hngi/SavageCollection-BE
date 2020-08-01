@@ -71,7 +71,7 @@
                 </div>
 
                 {{-- Initialize uploads variable --}}
-                @php $user_uploads = App\Upload::all() @endphp
+                @php $user_uploads = App\Upload::where('user_id', Auth::user()->id)->get() @endphp
                 @php $user_uploads_count = count($user_uploads) @endphp
 
                 @if ($user_uploads_count > 0)
