@@ -52,4 +52,8 @@ img.lazy {
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
+
+.btn-danger{
+    margin-top: 2%;
+}
 </style>

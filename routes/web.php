@@ -25,7 +25,10 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@home')->name('dashboard.home'); // @eni4sure
 Route::get('/new_upload', 'DashboardController@newUpload')->name('dashboard.new_upload'); //@drOmoh
 Route::get('/my_uploads', 'DashboardController@myUploads')->name('dashboard.my_uploads'); //@drOmoh
+Route::get('/edit/{id}', 'DashboardController@edit')->name("dashboard.edit");//Thobeats
 
 // Actions
 Route::post('/new/image_upload', 'DashboardController@newImageUpload')->name('add.image_upload'); //@drOmoh
 Route::post('/new/text_upload', 'DashboardController@newTextUpload')->name('add.text_upload'); //@drOmoh
+Route::put('/update/{id}', 'DashboardController@update')->name("dashboard.update");//Thobeats
+Route::delete('/delete/{id}', 'DashboardController@delete')->name("dashboard.delete");//Thobeats

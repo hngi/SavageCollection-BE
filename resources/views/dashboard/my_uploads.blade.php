@@ -37,6 +37,9 @@
                         <h1>Hello, {{ Auth::user()->username }}</h1>
 
                         <div class="container mt-5">
+                        @if (\Session::has('success'))
+                            <div class="alert alert-success">{!! \Session::get('success') !!}</div>
+                        @endif
 
                             @if ($user_uploads_count > 0)
                                 <div class="row">
@@ -44,14 +47,34 @@
                                         @if ($data->type == 'image')
                                             <div class="mb-3 col-lg-4 col-md-4">
                                                 <img data-src="{{ asset('uploads/memes/'.$data->image) }}" class="lazy img-responsive meme_size">
+                                                <!-- <button type="submit" class="btn btn-danger" data-target="">Delete</button> -->
+                                                <form action="{{route('dashboard.delete', $data->id)}}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                                 
                                             </div>
                                         @else
                                             <div class="mb-3 col-lg-4 col-md-4">
                                                 <div class="card text_meme">
-                                                <div class="card-body text-center">
-                                                    <h2 class="card-text text-dark">{{ $data->text }}</h2>
-                                                </div>
-                                                </div>
+                                                    <div class="card-body text-center">
+                                                        <h2 class="card-text text-dark">{{ $data->text }}</h2>                                                    
+                                                    </div>                                                    
+                                                </div>  
+
+                                                <a href="{{ route('dashboard.edit', $data->id) }}" role="button" class="btn btn-primary">
+                                                    Edit
+                                                </a>
+                                                <form action="{{route('dashboard.delete', $data->id)}}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>                                             
+
+                                                
+                                                
+                                               
                                             </div>
                                         @endif
                                     @endforeach

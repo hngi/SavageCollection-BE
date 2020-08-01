@@ -95,4 +95,36 @@ class DashboardController extends Controller
 
         return redirect()->back()->with('success', 'Upload Successful ✔');
     }
+
+    public function edit(Upload $upload, $id){
+
+        $data = $upload->where("id", $id)->get();
+        return view('dashboard.update')->with("data", $data);
+    }
+
+    public function update(Request $request, Upload $upload, $id){
+        Validator::make($request->all(), [
+            'title' => 'required|sometimes|max:255',
+            'meme_text' => 'required|string|max:255',
+        ])->validate();        
+        
+        $data = $upload->where("id", $id)->update([
+            "title" => $request["title"],
+            "text" => $request["meme_text"]
+        ]);
+
+        if($data){
+           return redirect()->route('dashboard.my_uploads')->with("success", "Update Successful");
+        }else {
+            return back()->with("error", "Update failed");
+        }
+    }
+
+    public function delete($id){
+
+        $data = Upload::findOrfail($id);
+
+        $data->delete();
+        return redirect()->route('dashboard.home');
+    }
 }
