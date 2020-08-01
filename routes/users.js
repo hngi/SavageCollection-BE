@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
     console.log(file);
     //cb() specifies potential error , and the original file name
     cb(null, file.originalname);
-  },
+  }
 });
 
 const fileFilter = (req, file, cb) => {
@@ -31,7 +31,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: { filesize: 1024 * 1024 * 10 },
-  fileFilter: fileFilter,
+  fileFilter: fileFilter
 });
 
 router.post("/post/create", auth, upload.single("image"), user.CreatePost);
@@ -39,5 +39,6 @@ router.get("/post", auth, user.GetUserPost);
 router.get("/posts", user.GetAllPost);
 router.get("/post/:_id/details", user.GetPostById);
 router.get("/post/:_id/delete", user.DeletePost);
+router.get("/user/logout", user.logout);
 
 module.exports = router;

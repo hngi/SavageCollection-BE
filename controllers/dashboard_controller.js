@@ -1,41 +1,33 @@
 const mongoose = require("mongoose");
 const UploadModel = require("../models/uploads");
+const UserModel = require("../models/users");
 
-// exports.getDashboard = (req, res) => {
-//   UploadModel.find()
-//     .select()
-//     .exec()
-//     .then((result) => {
-//       res.status(200).render("dashboard", {
-//         data: result,
-//       });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).json({
-//         error: err,
-//       });
-//     });
-// };
+exports.getDashboard = async (req, res, next) => {
+  let id = req.userData._id;
+  console.log(id);
+  try {
+    let user = {
+      username: req.userData.username,
+      email: req.userData.email,
+      _id: id,
+    };
 
-exports.getDashboard = (req, res, next) => {
-  UploadModel.find()
-    .select()
-    .exec()
-    .then((results) => {
-      console.log(results);
-      console.log(req.userData);
-      let data = results.filter(
-        (result) => result.user_id == req.userData.user
-      );
-      res.status(200).render("dashboard", {
-        data,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
+    let result = await UploadModel.find({ userId: id }).select().exec();
+
+    console.log(user);
+    console.log("........................................");
+    console.log(result);
+
+    // let data = result.filter((entry) => entry._id == user._id);
+
+    res.status(200).render("dashboard", {
+      data: result,
+      user,
     });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: err,
+    });
+  }
 };
