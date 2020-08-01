@@ -29,3 +29,5 @@ Route::get('/my_uploads', 'DashboardController@myUploads')->name('dashboard.my_u
 // Actions
 Route::post('/new/image_upload', 'DashboardController@newImageUpload')->name('add.image_upload');
 Route::post('/new/text_upload', 'DashboardController@newTextUpload')->name('add.text_upload');
+Route::put('/update/{id}', 'DashboardController@update')->name("dashboard.update");
+Route::delete('/delete/{id}', 'DashboardController@delete')->name("dashboard.delete");
