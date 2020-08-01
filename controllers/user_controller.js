@@ -41,6 +41,26 @@ exports.GetAllPost = (req, res, next) => {
     });
 };
 
+exports.GetAllpost = (req, res, next) => {
+  UploadModel.find()
+    .select("_id image_url")
+    .exec()
+    .then((results) => {
+      res.status(200).render("views", {
+        data: results,
+        isLogin: {
+          logged: true,
+        },
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
 exports.GetUserPost = async (req, res, next) => {
   let id = req.userData.user;
   console.log(id);
@@ -87,4 +107,9 @@ exports.DeletePost = (req, res, next) => {
     .catch((error) => {
       return res.redirect("/user/dashboard");
     });
+};
+
+exports.Logout = (req, res) => {
+  res.clearCookie("auth");
+  res.redirect("/");
 };
