@@ -46,14 +46,7 @@
                                     @foreach ($user_uploads as $data)
                                         @if ($data->type == 'image')
                                             <div class="mb-3 col-lg-4 col-md-4">
-                                                <img data-src="{{ asset('uploads/memes/'.$data->image) }}" class="lazy img-responsive meme_size">
-                                                <!-- <button type="submit" class="btn btn-danger" data-target="">Delete</button> -->
-                                                <form action="{{route('dashboard.delete', $data->id)}}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
-                                                 
+                                                <img data-src="{{ $data->image }}" class="lazy img-responsive meme_size">
                                             </div>
                                         @else
                                             <div class="mb-3 col-lg-4 col-md-4">

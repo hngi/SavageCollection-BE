@@ -6,6 +6,7 @@ use App\Upload;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -55,24 +56,22 @@ class DashboardController extends Controller
     {
         Validator::make($request->all(), [
             'title' => 'sometimes|max:255',
-            'meme_image' => 'required|image|max:1024',
+            'meme_image' => 'required|mimes:jpeg,jpg,png|max:1024',
         ])->validate();
 
         // Capture Files for upload
-        $meme_image = $request->file('meme_image');
-        // Generate Random Name
-        $save_as_name_meme_image = Str::random(35) . "." . $meme_image->getClientOriginalExtension();
-        // Set Folder to move file
-        $upload_path_meme_image = public_path().'/uploads/memes';
-        // Move File
-        $move_meme_image = $meme_image->move( $upload_path_meme_image, $save_as_name_meme_image );
+        $meme_image = $request->file('meme_image')->getRealPath();
+
+        Cloudder::upload($meme_image, null);
+
+        $cloudinary_image = Cloudder::getResult();
 
         $upload = Upload::create([
             'user_id' => Auth::user()->id,
             'title' => $request['title'] != "" ? $request['title'] : Str::random(50),
             'type' => 'image',
             'points' => '1',
-            'image' => $save_as_name_meme_image,
+            'image' => $cloudinary_image['url'],
         ]);
 
         return redirect()->back()->with('success', 'Upload Successful ✔');
