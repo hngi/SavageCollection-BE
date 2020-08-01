@@ -9,7 +9,6 @@ const cors = require("cors");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 const session = require("express-session");
-const flush = require("connect-flash");
 const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
 
@@ -64,7 +63,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(flush());
 
 app.use(express.static(path.join(__dirname, "public")));
 

@@ -20,20 +20,26 @@ const UserModel = require("../models/users");
 // };
 
 exports.getDashboard = async (req, res, next) => {
-  let id = req.userData.user;
+  console.log(req.userData);
   try {
-    let user = await UserModel.findOne({ id }).select("username email _id");
+    let user = {
+      username: req.userData.username,
+      email: req.userData.email,
+      user_id: req.userData._id,
+    };
 
-    let data = await UploadModel.find({ user_id: id }).select().exec();
+    let data = await UploadModel.find({ userId: req.userData._id })
+      .select()
+      .exec();
 
     res.status(200).render("dashboard", {
       data,
-      user
+      user,
     });
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      error: err
+      error: err,
     });
   }
 };
