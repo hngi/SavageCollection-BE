@@ -57,41 +57,35 @@
                 <div class="title text-center pb-5">
                     <h2>Our Collections</h2>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 mb-5">
-                        <div class="img-wrap">
-                            <img src="assets/images/collections/showcase_1_img_1.jpg" class="img-fluid" alt="collections" />
-                        </div>
+                {{-- Initialize uploads variable --}}
+                @php $user_uploads = App\Upload::paginate(15) @endphp
+                @php $user_uploads_count = count($user_uploads) @endphp
+
+                @if ($user_uploads_count > 0)
+                    <div class="row">
+                        @foreach ($user_uploads as $data)
+                            @if ($data->type == 'image')
+                                <div class="col-md-3 mb-5">
+                                    <div class="img-wrap">
+                                        <img data-src="{{ $data->image }}" class="img-fluid lazy" />
+                                    </div>
+                                </div>
+                            @else
+                                <div class="col-md-3 mb-5">
+                                    <div class="img-wrap">
+                                        <h4 class="text-white text_wrapper">{{ $data->text }}</h4>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
-                    <div class="col-md-4 mb-5">
-                        <div class="img-wrap">
-                            <img src="assets/images/collections/showcase_1_img_2.jpg" class="img-fluid" alt="collections" />
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <div class="img-wrap">
-                            <img src="assets/images/collections/showcase_1_img_3.jpg" class="img-fluid" alt="collections" />
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <div class="img-wrap">
-                            <img src="assets/images/collections/showcase_1_img_4.jpg" class="img-fluid" alt="collections" />
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <div class="img-wrap">
-                            <img src="assets/images/collections/showcase_1_img_5.jpg" class="img-fluid" alt="collections" />
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <div class="img-wrap">
-                            <img src="assets/images/collections/showcase_1_img_6.jpg" class="img-fluid" alt="collections" />
-                        </div>
-                    </div>
-                </div>
+                @else
+                    <div class="alert alert-warning">We haven't collected any savages :( . Check back later</div>
+                @endif
+
                 <div class="text-center mt-4">
                     <a href="{{ url('/all') }}" class="btn btn-lg action-1 px-5 my-2 my-sm-0" role="button">See More</a>
-                </div>
+                </>
             </div>
         </section>
 

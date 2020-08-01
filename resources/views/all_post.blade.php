@@ -24,20 +24,20 @@
                             @if ($data->type == 'image')
                                 <div class="col-md-3 mb-5">
                                     <div class="img-wrap">
-                                        <img src="{{ $data->image }}" class="img-fluid" />
+                                        <img data-src="{{ $data->image }}" class="img-fluid lazy" />
                                     </div>
                                 </div>
                             @else
                                 <div class="col-md-3 mb-5">
                                     <div class="img-wrap">
-                                        <h2 class="card-text text-dark">{{ $data->text }}</h2>
+                                        <h4 class="text-white text_wrapper">{{ $data->text }}</h4>
                                     </div>
                                 </div>
                             @endif
                         @endforeach
                     </div>
                 @else
-                    <div class="alert alert-warning">We have collected any savages :( . Check back later</div>
+                    <div class="alert alert-warning">We haven't collected any savages :( . Check back later</div>
                 @endif
             </div>
         </section>
