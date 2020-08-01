@@ -14,7 +14,7 @@ exports.CreatePost = async (req, res, next) => {
   //new instance of the model to store data
   const uploadModel = new UploadModel({
     image_url: imageURL,
-    userId: req.userData._id,
+    userId: req.userData._id
   });
 
   const data = await uploadModel.save();
@@ -28,15 +28,15 @@ exports.GetAllPost = (req, res, next) => {
   UploadModel.find()
     .select("_id image_url")
     .exec()
-    .then((results) => {
+    .then(results => {
       res.status(200).render("views", {
-        data: results,
+        data: results
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json({
-        error: err,
+        error: err
       });
     });
 };
@@ -51,7 +51,7 @@ exports.GetUserPost = async (req, res, next) => {
 
     res.status(200).render("dashboard", {
       data,
-      user,
+      user
     });
   } catch (err) {
     return res.redirect("/user/dashboard");
@@ -62,17 +62,17 @@ exports.GetPostById = (req, res, next) => {
   UploadModel.findOne({ _id: req.params.id })
     .select()
     .exec()
-    .then((result) => {
+    .then(result => {
       return res.status(200).json({
         success: true,
         message: "Successfully retrieved post",
-        data: result,
+        data: result
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json({
-        error: err,
+        error: err
       });
     });
 };
@@ -81,10 +81,15 @@ exports.DeletePost = (req, res, next) => {
   UploadModel.deleteOne({ _id: req.params.id })
     .select()
     .exec()
-    .then((result) => {
+    .then(result => {
       return res.redirect("/user/dashboard");
     })
-    .catch((error) => {
+    .catch(error => {
       return res.redirect("/user/dashboard");
     });
+};
+
+exports.Logout = (req, res) => {
+  res.clearCookie("auth");
+  res.redirect("/posts");
 };
