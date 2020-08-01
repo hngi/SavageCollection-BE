@@ -16,16 +16,16 @@ use Illuminate\Support\Facades\Route;
 // This will be replaced with homepage
 Route::view('/', 'index');
 
-Route::view('/all_post', 'all_post'); // Uncomment this when view ready
+Route::view('/all', 'all_post');
 
 // Auth Routes. LOGIN, REGISTER, REST PASSWORD and FORGOT PASSWORD
 Auth::routes();
 
 // View and Controller for logged in dashboard
 Route::get('/dashboard', 'DashboardController@home')->name('dashboard.home'); // @eni4sure
-Route::get('/new_upload', 'DashboardController@newUpload')->name('dashboard.new_upload'); //@drOmoh
-Route::get('/my_uploads', 'DashboardController@myUploads')->name('dashboard.my_uploads'); //@drOmoh
+Route::get('/new_upload', 'DashboardController@newUpload')->name('dashboard.new_upload');
+Route::get('/my_uploads', 'DashboardController@myUploads')->name('dashboard.my_uploads');
 
 // Actions
-Route::post('/new/image_upload', 'DashboardController@newImageUpload')->name('add.image_upload'); //@drOmoh
-Route::post('/new/text_upload', 'DashboardController@newTextUpload')->name('add.text_upload'); //@drOmoh
+Route::post('/new/image_upload', 'DashboardController@newImageUpload')->name('add.image_upload');
+Route::post('/new/text_upload', 'DashboardController@newTextUpload')->name('add.text_upload');

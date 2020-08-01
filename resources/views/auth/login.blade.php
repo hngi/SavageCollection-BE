@@ -1,56 +1,50 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
     @include('partials.head')
 
-    @include('partials.style')
-
     <body>
 
-        @include('partials.navbar')
-
-        <div class="min_wrap">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                        <div class="card card-signin my-5">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Sign In</h5>
-                                @if ($errors->all())
-                                    <div class="alert alert-danger">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </div>
-                                @endif
-                                <form method="POST" action="{{ route('login') }}" class="form-signin">
-                                    @csrf
-                                    <div class="form-label-group">
-                                        <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email address" required />
-                                        <label for="email">Email address</label>
-                                    </div>
-                                    <div class="form-label-group">
-                                        <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required />
-                                        <label for="password">Password</label>
-                                    </div>
-                                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
-
-                                    <hr class="my-4" />
-                                    <div class="row">
-                                        {{-- <a class="col-6 text-left" href=""><p>Forgot Password</p></a> --}}
-                                        <a class="col-12 text-right" href="{{ route('register') }}"><p>New User ? Sign Up</p></a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+        <section id="login">
+            <div class="row">
+                <div class="col-lg-5 logo d-flex align-items-center justify-content-center text-center">
+                    <div>
+                        <a href="{{ url('/')}}" class="brand">
+                            SC
+                        </a>
+                        <p><hr></p>
+                        <a href="{{ url('/')}}">Go back to home</a>
                     </div>
                 </div>
+                <div class="col-lg-7 form">
+                    <div class="text-center mb-5">
+                        <h4>Login to your account</h4>
+                        <p>Don't have an account? <a href="{{ url('/register')}}">Sign Up Free!</a></p>
+                    </div>
+                    @if ($errors->all())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('login') }}" class="form-signin">
+                        @csrf
+                        <div class="form-group">
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email Address" required />
+                        </div>
+                        <div class="form-group">
+                            <div class="pwdMask">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" required placeholder="Password" />
+                            </div>
+                        </div>
+                        <button type="submit" class="mt-3 btn btn-lg btn-primary">Log In</button>
+                    </form>
+                </div>
             </div>
+        </section>
 
-        </div>
 
-        @include('partials.footer')
-
+        @include('partials.footer_scripts')
     </body>
 </html>

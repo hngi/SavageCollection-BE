@@ -1,45 +1,49 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
     @include('partials.head')
-
-    @include('partials.style')
 
     <body>
 
         @include('partials.navbar')
 
-        <div class="min_wrap">
+        <!-- savage collections -->
+        <section id="collections" class="container-fluid">
+            <div class="container">
+                <div class="title text-center pb-5">
+                    <h2>Collections</h2>
+                </div>
 
-            {{-- Initialize uploads variable --}}
-            @php $user_uploads = App\Upload::all() @endphp
-            @php $user_uploads_count = count($user_uploads) @endphp
+                {{-- Initialize uploads variable --}}
+                @php $user_uploads = App\Upload::all() @endphp
+                @php $user_uploads_count = count($user_uploads) @endphp
 
-            <div class="container mt-5">
                 @if ($user_uploads_count > 0)
                     <div class="row">
                         @foreach ($user_uploads as $data)
                             @if ($data->type == 'image')
-                                <div class="mb-3 col-lg-4 col-md-4">
-                                    <img data-src="{{ asset('uploads/memes/'.$data->image) }}" class="lazy img-responsive meme_size">
+                                <div class="col-md-3 mb-5">
+                                    <div class="img-wrap">
+                                        <img data-src="{{ $data->image }}" class="img-fluid lazy" />
+                                    </div>
                                 </div>
                             @else
-                                <div class="mb-3 col-lg-4 col-md-4">
-                                    <div class="card text_meme">
-                                    <div class="card-body text-center">
-                                        <h2 class="card-text text-dark">{{ $data->text }}</h2>
-                                    </div>
+                                <div class="col-md-3 mb-5">
+                                    <div class="img-wrap">
+                                        <h4 class="text-white text_wrapper">{{ $data->text }}</h4>
                                     </div>
                                 </div>
                             @endif
                         @endforeach
                     </div>
                 @else
-                    <div class="alert alert-warning">We have collected any savages :( . Check back later</div>
+                    <div class="alert alert-warning">We haven't collected any savages :( . Check back later</div>
                 @endif
             </div>
-        </div>
+        </section>
 
         @include('partials.footer')
+
+        @include('partials.footer_scripts')
     </body>
 </html>
