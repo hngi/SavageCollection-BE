@@ -64,16 +64,16 @@ app.use(
   })
 );
 
+app.use(express.static(path.join(__dirname, "public")));
+
 //routes
-app.get("/", (req, res) => {
-  res.status(200).redirect("/home");
-});
+
+app.use(landingPage);
 app.use(login);
 app.use(register);
 app.use(user);
 app.use(changePassword);
 app.use(dashboard);
-app.use(landingPage);
 app.use(reward);
 
 // view engine setup
@@ -81,9 +81,6 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/css", express.static(path.join(__dirname, "/public/stylesheets")));
-app.use("/js", express.static(path.join(__dirname, "/public/javascripts")));
-app.use("/img", express.static(path.join(__dirname, "/public/images")));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
