@@ -1,0 +1,11 @@
+:root {
+    --sc-black: black;
+    --sc-blue: #262b48;
+    --sc-l-blue: #0056B3;
+    --sc-red: #DC3545;
+}
+
+/* footer */
+footer {
+    background-color: var(--sc-blue);
+}

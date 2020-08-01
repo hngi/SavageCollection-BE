@@ -1,0 +1,114 @@
+@font-face {
+  font-family: 'Lemon Jelly';
+  src: url("../fonts/LemonJellyPersonalUse-dEqR.ttf");
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
+body {
+  padding: 2rem 0;
+  min-height: 100vh;
+  background: url('../images/SC.jpg') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lato', sans-serif;
+}
+
+#login {
+  width: 50%;
+}
+
+.logo .brand {
+  font-family: 'Lemon Jelly';
+  font-size: 100px;
+}
+
+.logo .brand:hover {
+  text-decoration: none;
+}
+
+.logo, .form {
+  padding: 3rem 2rem;
+}
+
+.logo {
+  background-color: rgba(38, 43, 72, 0.92);
+  color: #fff;
+}
+
+.form {
+  background-color: #fff;
+}
+
+.form-group input {
+  border: none;
+  border-bottom: 1.5px solid #ddd;
+  border-radius: 0;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: none;
+}
+
+.form-control {
+  color: #333333;
+  font-size: 16px;
+  height: 50px;
+  padding: 12px 0px;
+  outline: none;
+  border: 0 none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#show_hide_password {
+  position: relative;
+}
+
+#show_hide_password a {
+  position: absolute;
+  color: #b6b5b5;
+  right: 0;
+  top: 15px;
+}
+
+#show_hide_password a:hover {
+  color: #007bff;
+}
+
+button {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  #login {
+    width: 65%;
+  }
+}
+
+@media (max-width: 450px) {
+  #login {
+    width: 80%;
+  }
+}
+
+@media (max-width: 320px) {
+  .form-group.form-check {
+    padding-left: 0;
+  }
+
+  .check-wrap {
+    padding-left: .9rem;
+  }
+
+  .login-options {
+    flex-direction: column;
+    text-align: center;
+  }
+}

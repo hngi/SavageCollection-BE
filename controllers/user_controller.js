@@ -1,49 +1,42 @@
 const mongoose = require("mongoose");
 const UploadModel = require("../models/uploads");
+const imageUploader = require("../utils/imageUploader");
 const UserModel = require("../models/users");
 
-exports.CreatePost = (req, res, next) => {
-  console.log(req.file);
-  console.log(req.body, req.body);
+exports.CreatePost = async (req, res, next) => {
   if (!req.file) {
-    console.log("No file received");
-    return res.send({
-      success: false
-    });
+    return res.redirect("/user/dashboard");
   }
+
+  const imagUri = imageUploader.dataUri(req);
+  const imageURL = await imageUploader.uploadImage(imagUri);
+
   //new instance of the model to store data
   const uploadModel = new UploadModel({
-    _id: new mongoose.Types.ObjectId(),
-    image_url: req.file.path,
-    userId: req.userData._id
+    image_url: imageURL,
+    userId: req.userData._id,
   });
-  uploadModel
-    .save()
-    .then(result => {
-      console.log(result);
-      res.status(201).redirect("/dashboard");
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
+
+  const data = await uploadModel.save();
+
+  console.log(data);
+
+  return res.redirect("/user/dashboard");
 };
 
 exports.GetAllPost = (req, res, next) => {
   UploadModel.find()
     .select("_id image_url")
     .exec()
-    .then(results => {
+    .then((results) => {
       res.status(200).render("views", {
-        data: results
+        data: results,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json({
-        error: err
+        error: err,
       });
     });
 };
@@ -58,54 +51,40 @@ exports.GetUserPost = async (req, res, next) => {
 
     res.status(200).render("dashboard", {
       data,
-      user
+      user,
     });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      error: err
-    });
+    return res.redirect("/user/dashboard");
   }
 };
 
 exports.GetPostById = (req, res, next) => {
-  UploadModel.findOne({ _id: req.params._id })
+  UploadModel.findOne({ _id: req.params.id })
     .select()
     .exec()
-    .then(result => {
+    .then((result) => {
       return res.status(200).json({
         success: true,
         message: "Successfully retrieved post",
-        data: result
+        data: result,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json({
-        error: err
+        error: err,
       });
     });
 };
 
 exports.DeletePost = (req, res, next) => {
-  UploadModel.deleteOne({ _id: req.params._id })
+  UploadModel.deleteOne({ _id: req.params.id })
     .select()
     .exec()
-    .then(result => {
-      return res.status(200).json({
-        success: true,
-        message: "Successfully deleted post",
-        data: result
-      });
+    .then((result) => {
+      return res.redirect("/user/dashboard");
     })
-    .catch(error => {
-      res.status(500).json({
-        error: err
-      });
+    .catch((error) => {
+      return res.redirect("/user/dashboard");
     });
-};
-
-exports.logout = (req, res) => {
-  res.clearCookie("auth");
-  res.redirect("/posts");
 };
