@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/homepage2.css') }}" />
     @endif
 
-    <title>Savage Collectionse</title>
+    <title>Savage Collector</title>
 </head>
 <style>
     img.lazy {
