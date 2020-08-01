@@ -5,7 +5,6 @@ module.exports = async (req, res, next) => {
   //to decode and validate the token
   try {
     const token = req.cookies.auth;
-    console.log(token);
     const decoded = jwt.verify(token, process.env.JWT_KEY);
     let user = await UserModel.findOne({ username: decoded.username });
     req.userData = user;

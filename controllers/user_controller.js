@@ -13,13 +13,14 @@ exports.CreatePost = async (req, res, next) => {
 
   //new instance of the model to store data
   const uploadModel = new UploadModel({
-    title: req.body.title,
-    text: req.body.text,
-    type: req.body.type,
     image_url: imageURL,
-    userId: req.userData.userId,
+    userId: req.userData._id,
   });
+
   const data = await uploadModel.save();
+
+  console.log(data);
+
   return res.redirect("/user/dashboard");
 };
 
