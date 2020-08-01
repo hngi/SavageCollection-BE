@@ -1,4 +1,4 @@
-@if ( request()->is('login') != true && request()->is('register') != true )
+{{-- @if ( request()->is('login') != true && request()->is('register') != true )
     <footer class="mt-5">
         <div class="text-center pt-4 pb-2 justify-content-center align-items-center">
             <p class="text-uppercase text-white">&copy; Savage Collector 2020.</p>
@@ -16,13 +16,11 @@
 @endif
 
 <script src="{{ asset('assets/js/jquery.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script src="https://kit.fontawesome.com/fc9346f24c.js" crossorigin="anonymous"></script>
 <script src="{{ asset('assets/js/popper.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+ --}}
 
-<script>
-$(function() {
-    $('.lazy').lazy();
-});
-</script>
+<footer id="footer" class="text-center">
+    <p class="py-4">&copy; 2020 Savage Collections. All rights reserved</p>
+</footer>

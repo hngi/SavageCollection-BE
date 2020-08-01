@@ -1,40 +1,30 @@
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top shadow-lg px-5 py-3">
-        <!-- Brand -->
-        <a class="navbar-brand text-uppercase" id="logo" href="{{ url('/') }}">SC</a>
+<nav id="nav" class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand logo" href="{{ url('/') }}">SC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#savageCollections" aria-controls="savageCollections" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="savageCollections">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url('/') }}#nav">Home </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/') }}#how">How It Works</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/') }}#collections">Savages</a>
+            </li>
+        </ul>
+        @if (Route::has('login'))
+            @auth
+                <a class="btn btn-lg action-2 px-5 my-2 my-sm-0" href="{{ url('/dashboard') }}">Dashboard</a>
+            @else
+                <a class="btn btn-lg px-5 text-white my-2 my-sm-0" href="{{ route('login') }}">Login</a>
 
-        <!-- Toggler/collapsibe Button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Navbar links -->
-        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-uppercase text-light" href="{{ url('/') }}">home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-uppercase text-light" href="{{ url('/all') }}">All Savages</a>
-                </li>
-                @if (Route::has('login'))
-                    @auth
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase text-light" href="{{ url('/dashboard') }}">Dashboard</a>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase text-light" href="{{ route('login') }}">Login</a>
-                        </li>
-
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link text-uppercase text-light" href="{{ route('register') }}">Register</a>
-                            </li>
-                        @endif
-                    @endauth
+                @if (Route::has('register'))
+                    <a class="btn btn-lg action-2 px-5 my-2 my-sm-0" href="{{ route('register') }}">Sign Up</a>
                 @endif
-            </ul>
-        </div>
-    </nav>
-</header>
+            @endauth
+        @endif
+    </div>
+</nav>

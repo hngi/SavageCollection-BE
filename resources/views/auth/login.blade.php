@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
     @include('partials.head')
 
     <body>
-
-        @include('partials.navbar')
 
         <section id="login">
             <div class="row">
@@ -14,11 +12,15 @@
                         <a href="{{ url('/')}}" class="brand">
                             SC
                         </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p><hr></p>
                         <a href="{{ url('/')}}">Go back to home</a>
                     </div>
                 </div>
                 <div class="col-lg-7 form">
+                    <div class="text-center mb-5">
+                        <h4>Login to your account</h4>
+                        <p>Don't have an account? <a href="{{ url('/register')}}">Sign Up Free!</a></p>
+                    </div>
                     @if ($errors->all())
                         <div class="alert alert-danger">
                             @foreach ($errors->all() as $error)
@@ -27,18 +29,14 @@
                         </div>
                     @endif
                     <form method="POST" action="{{ route('login') }}" class="form-signin">
-                        <div class="text-center mb-5">
-                            <h4>Login to your account</h4>
-                            <p>Don't have an account? <a href="{{ url('/register')}}">Sign Up Free!</a></p>
-                        </div>
                         @csrf
-                        <div class="form-label-group">
-                            <label for="email">Email address</label>
-                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email address" required />
+                        <div class="form-group">
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email Address" required />
                         </div>
-                        <div class="form-label-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required />
+                        <div class="form-group">
+                            <div class="pwdMask">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" required placeholder="Password" />
+                            </div>
                         </div>
                         <button type="submit" class="mt-3 btn btn-lg btn-primary">Log In</button>
                     </form>
@@ -46,7 +44,7 @@
             </div>
         </section>
 
-        @include('partials.footer')
 
+        @include('partials.footer_scripts')
     </body>
 </html>

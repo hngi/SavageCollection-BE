@@ -7,153 +7,96 @@
 
         @include('partials.navbar')
 
-        <main class="mt-5">
-            <section id="welcome" class="d-flex justify-content-center align-items-center">
-                <div class="justify-content-center">
-                    <h1 class="text-uppercase text-center text-white">Savage Collector</h1>
-                    <p class="text-uppercase text-center text-white">Funny, savage replies</p>
-                    <p class="text-capitalize text-center">
-                        <a href="{{ url('/all')}}" class="btn text-white px-4 py-2" id="btn-see"><i class="fa fa-paw mr-2"></i>see savages</a>
-                    </p>
-                </div>
-            </section>
+        <!-- Hero -->
+        <header id="hero" class="container-fluid d-flex align-items-center">
+            <div class="hero-text container text-center">
+                <h1>Funny Savage Collector</h1>
+                <p>Funny, savage replies</p>
+                <a href="{{ url('/all')}}" class="btn btn-lg action-1 px-5 my-2 my-sm-0" role="button">See Savages</a>
+            </div>
+        </header>
 
-            <section id="how-it-works" class="mt-5 justify-content-center">
-                <h3 class="text-uppercase text-dark text-center mb-5">how it works</h3>
-                <div class="justify-content-center box text-center container">
-                    <div class="card shadow-lg py-5 bg-warning">
-                        <p lass="card-text">1. Upload your Savage photo of choice.</p>
+        <!-- How -->
+        <section id="how" class="container-fluid text-center">
+            <div class="container">
+                <div class="title text-center pb-5">
+                    <h2>How It Works</h2>
+                </div>
+                <div class="row">
+                    <div class="outline col-md">
+                        <div class="icon">
+                            <img src="{{ asset('assets/images/upload.svg') }}" class="img-fluid" alt="upload" />
+                        </div>
+                        <p>Upload savage photo</p>
                     </div>
-                    <div class="card shadow-lg py-5 bg-warning">
-                        <p lass="card-text">2. Get your points.</p>
+                    <div class="outline col-md">
+                        <div class="icon">
+                            <img src="{{ asset('assets/images/points.svg') }}" class="img-fluid" alt="points" />
+                        </div>
+                        <p>Get value worth of points</p>
                     </div>
-                    <div class="card shadow-lg py-5 bg-warning">
-                        <p lass="card-text">3. Get value worth of points.</p>
+                    <div class="outline col-md">
+                        <div class="icon">
+                            <img src="{{ asset('assets/images/reward.svg') }}" class="img-fluid" alt="reward" />
+                        </div>
+                        <p>Claim your rewards</p>
                     </div>
-                    <div class="card shadow-lg py-5 bg-warning">
-                        <p lass="card-text">4. Claim your rewards.</p>
-                    </div>
-                    <div class="card shadow-lg py-5 bg-warning">
-                        <p lass="card-text">5. Get paid.</p>
+                    <div class="outline col-md">
+                        <div class="icon">
+                            <img src="{{ asset('assets/images/paid.svg') }}" class="img-fluid" alt="get paid" />
+                        </div>
+                        <p>Get paid</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="images-display" class="mt-5 justify-content-center">
-                <h3 class="text-uppercase text-dark text-center mb-5">our collections</h3>
-                <div class="grid-box container-fluid text-center justify-content-center px-sm-5">
-                    <div>
-                        <img src="assets/images/dada-awu.jpeg" class="img-fluid" data-toggle="modal" data-target="#myModal-1" />
-                    </div>
-                    <div>
-                        <img src="assets/images/dada-awu.jpeg" class="img-fluid" data-toggle="modal" data-target="#myModal-2" />
-                    </div>
-                    <div>
-                        <img src="assets/images/dada-awu.jpeg" class="img-fluid" data-toggle="modal" data-target="#myModal-3" />
-                    </div>
-                    <div>
-                        <img src="assets/images/dada-awu.jpeg" class="img-fluid" data-toggle="modal" data-target="#myModal-4" />
-                    </div>
-                    <div>
-                        <img src="assets/images/dada-awu.jpeg" class="img-fluid" data-toggle="modal" data-target="#myModal-5" />
-                    </div>
-                    <div>
-                        <img src="assets/images/dada-awu.jpeg" class="img-fluid" data-toggle="modal" data-target="#myModal-6" />
-                    </div>
-                    <div>
-                        <img src="assets/images/dada-awu.jpeg" class="img-fluid" data-toggle="modal" data-target="#myModal-7" />
-                    </div>
-                    <div>
-                        <img src="assets/images/dada-awu.jpeg" class="img-fluid" data-toggle="modal" data-target="#myModal-8" />
-                    </div>
+        <!-- savage collections -->
+        <section id="collections" class="container-fluid">
+            <div class="container">
+                <div class="title text-center pb-5">
+                    <h2>Our Collections</h2>
                 </div>
-                <!-- modals -->
-                <div class="modal fade" id="myModal-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <img src="assets/images/dada-awu.jpeg" class="img-fluid img-rescale" />
-                            </div>
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <div class="img-wrap">
+                            <img src="assets/images/collections/showcase_1_img_1.jpg" class="img-fluid" alt="collections" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <div class="img-wrap">
+                            <img src="assets/images/collections/showcase_1_img_2.jpg" class="img-fluid" alt="collections" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <div class="img-wrap">
+                            <img src="assets/images/collections/showcase_1_img_3.jpg" class="img-fluid" alt="collections" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <div class="img-wrap">
+                            <img src="assets/images/collections/showcase_1_img_4.jpg" class="img-fluid" alt="collections" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <div class="img-wrap">
+                            <img src="assets/images/collections/showcase_1_img_5.jpg" class="img-fluid" alt="collections" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <div class="img-wrap">
+                            <img src="assets/images/collections/showcase_1_img_6.jpg" class="img-fluid" alt="collections" />
                         </div>
                     </div>
                 </div>
-
-                <div class="modal fade" id="myModal-2">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <img src="assets/images/dada-awu.jpeg" class="img-fluid img-rescale" />
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center mt-4">
+                    <a href="{{ url('/all') }}" class="btn btn-lg action-1 px-5 my-2 my-sm-0" role="button">See More</a>
                 </div>
-
-                <div class="modal fade" id="myModal-3">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <img src="assets/images/dada-awu.jpeg" class="img-fluid img-rescale" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="myModal-4">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <img src="assets/images/dada-awu.jpeg" class="img-fluid img-rescale" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="myModal-5">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <img src="assets/images/dada-awu.jpeg" class="img-fluid img-rescale" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="myModal-6">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <img src="assets/images/dada-awu.jpeg" class="img-fluid img-rescale" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="myModal-7">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <img src="assets/images/dada-awu.jpeg" class="img-fluid img-rescale" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="myModal-8">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <img src="assets/images/dada-awu.jpeg" class="img-fluid img-rescale" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center mt-5">
-                    <a href="view.html" class="btn px-4 py-2 text-capitalize text-white" id="btn-view">view more</a>
-                </div>
-            </section>
-        </main>
+            </div>
+        </section>
 
         @include('partials.footer')
+
+        @include('partials.footer_scripts')
     </body>
 </html>

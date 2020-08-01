@@ -18,6 +18,10 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+a:hover {
+  color: #1eb9a7 !important;
+}
+
 #login {
   width: 50%;
 }
@@ -25,6 +29,11 @@ body {
 .logo .brand {
   font-family: 'Lemon Jelly';
   font-size: 100px;
+  color: #fff;
+}
+
+.logo .brand:hover {
+  color: #fff !important;
 }
 
 .logo .brand:hover {
@@ -36,7 +45,7 @@ body {
 }
 
 .logo {
-  background-color: rgba(38, 43, 72, 0.92);
+  background-color: rgba(47, 24, 147, 0.92);;
   color: #fff;
 }
 

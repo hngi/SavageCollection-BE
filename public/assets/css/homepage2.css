@@ -1,0 +1,159 @@
+@font-face {
+  font-family: "Lemon Jelly";
+  src: url("../fonts/LemonJellyPersonalUse-dEqR.ttf");
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: #919DAB;
+}
+
+p {
+  line-height: 1.7;
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: 600;
+  color: #28157a;
+}
+
+/***************************
+          Utilities
+***************************/
+.btn {
+  border-radius: 25px;
+}
+
+.btn.action-1 {
+  background-color: #25dac5;
+  color: #fff;
+}
+
+.btn.action-1:hover {
+  background-color: #1eb9a7 !important;
+}
+
+.btn.action-2 {
+  background-color: #482be7;
+  color: #fff;
+}
+
+.btn.action-2:hover {
+  background-color: #3b25b9 !important;
+}
+
+.container {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+/***************************
+          Nav
+***************************/
+nav {
+  padding: 2% 9% !important;
+  background: #2F1893;
+}
+
+.logo {
+  font-family: "Lemon Jelly";
+  font-size: 70px;
+}
+
+nav li {
+  margin-right: 2rem;
+}
+
+/***************************
+          Hero
+***************************/
+#hero {
+  min-height: 85vh;
+  background: #2F1893;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+#hero h1 {
+  font-size: 70px;
+  font-weight: 700;
+}
+
+.hero-text p {
+  padding: 2rem 14%;
+}
+
+/***************************
+          How it works
+***************************/
+#how .icon {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#how img {
+  width: 110px;
+}
+
+#how .outline {
+  margin: 1rem;
+  padding: 0 1rem 1rem;
+  border: 1px solid #ddd;
+}
+
+/***************************
+          Collections
+***************************/
+#collections .img-wrap {
+  height: 200px;
+}
+
+#collections .img-wrap img {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+}
+
+#collections .caption {
+  line-height: 1.3;
+  padding-top: 1rem;
+}
+
+/***************************
+        Get started
+***************************/
+#get-started {
+  background: url('../images/contact_1_bg@2x.jpg') no-repeat center center/cover;
+}
+
+#get-started .overlay {
+  min-height: 500px;
+  background: #2e189377;
+}
+
+#get-started p {
+  padding: 1rem 10% 1.5rem;
+}
+
+#get-started p, 
+#get-started h2 {
+  color: #fff;
+}
+
+#footer {
+  background-color: #28157a;
+  color: #fff;
+}
+
+/***************************
+        Media Query
+***************************/
+@media (max-width: 450px) {
+  #hero h1 {
+    font-size: 40px;
+  }
+}
