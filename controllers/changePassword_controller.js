@@ -4,6 +4,7 @@ const User = require('../models/users');
 const bcrypt = require('bcrypt');
 
 exports.forgot = async (req, res)  => {
+
     // console.log("body", req.body)
     const {email} = req.body;
     try {
