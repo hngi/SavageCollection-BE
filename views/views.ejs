@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SC - All Posts</title>
+    <link rel="stylesheet" href="/css/view.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/fonts/LemonJellyPersonalUse-dEqR.ttf" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top shadow-lg py-3">
+        <!-- Brand -->
+        <a class="navbar-brand text-uppercase" id="logo" href="#">sc</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapsibleNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="collapsibleNavbar"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                class="nav-link text-uppercase text-light"
+                href="dashboard.html"
+                >dashboard</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-uppercase text-light" href="/posts"
+                >views</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-uppercase text-light" href="/reward"
+                >reward</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-uppercase text-light"
+                href="/user/register"
+                >sign up</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-uppercase text-light" href="/user/login"
+                >login</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <section class="savage-feed">
+      <div class="savage-feed-heading">
+        <h2>All Savage Collection</h2>
+      </div>
+      <div class="container">
+        <div class="row">
+          <% data.forEach(result => { %>
+          <div class="col-md-3">
+            <div class="savage-img-box">
+              <img src="<%= result.image_url  %> " class="img-fluid" alt="" />
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+      <br />
+      <div class="savage-feed-button d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#"
+                >2 <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <footer class="mt-5">
+      <div
+        class="text-center pt-4 pb-2 justify-content-center align-items-center"
+      >
+        <p class="text-uppercase text-white">&copy;savage collections 2020.</p>
+        <p class="text-capitalize text-white">All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/js/popper.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>
