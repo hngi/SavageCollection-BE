@@ -23,7 +23,7 @@ exports.RegisterUser = async (req, res) => {
 
     res.status(201).cookie("auth", token).redirect("/user/dashboard");
   } catch (error) {
-    message = "An Internal Error Occurred";
+    message = "Username Or Email Already Exists";
     console.log(error);
     res.render("register", {
       success,
