@@ -81,14 +81,84 @@
                                 <div class="col-md-3 mb-5">
                                     <div class="img-wrap">
                                         <img data-src="{{ $data->image }}" class="img-fluid lazy" />
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Delete">
+                                            Delete
+                                        </button>
                                     </div>
                                 </div>
                             @else
                                 <div class="col-md-3 mb-5">
                                     <div class="img-wrap">
                                         <h4 class="text-white text_wrapper">{{ $data->text }}</h4>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Delete">
+                                            Delete
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Edit">
+                                            Edit 
+                                        </button>
                                     </div>
                                 </div>
+
+
+                                <!-- The Delete Modal -->
+                                <div class="modal" id="Delete">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                            <h4 class="modal-title">Are you sure?</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                                                                
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                                            <form action="{{route('dashboard.delete', $data->id)}}" method="POST">
+                                            @csrf
+                                            @method("DELETE")
+                                                <button type="submit" class="btn btn-success"> Yes </button>
+                                            </form>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- The Edit Modal -->
+                                <div class="modal" id="Edit">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Edit Text</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            
+                                            <form action="{{route('dashboard.update', $data->id)}}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                    <label for="email">Text:</label>
+                                                    <input type="text" value="{{$data->text}}" name="meme_text" class="form-control" placeholder="">
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                <a href="https://www.google.com/"><button type="submit" class="btn btn-success" >Submit </button></a>
+                                                </div>         
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             @endif
                         @endforeach
                     </div>
@@ -126,7 +196,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div>     
         </main>
         <!-- main -->
 
@@ -135,3 +205,9 @@
         @include('partials.footer_scripts')
     </body>
 </html>
+
+
+
+
+  
+  
