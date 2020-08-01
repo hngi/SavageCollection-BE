@@ -21,12 +21,13 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: { filesize: 1024 * 1024 * 10 },
-  fileFilter: fileFilter
+  fileFilter: fileFilter,
 });
 
 router.post("/post/create", auth, upload.single("image"), user.CreatePost);
 router.get("/post", auth, user.GetUserPost);
 router.get("/posts", user.GetAllPost);
+// router.get("/user/posts", auth, user.GetAllpost);
 router.get("/post/:id/details", user.GetPostById);
 router.get("/post/:id/delete", user.DeletePost);
 
