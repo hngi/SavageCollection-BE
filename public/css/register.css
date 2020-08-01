@@ -3,12 +3,7 @@
   src: url("../fonts/LemonJellyPersonalUse-dEqR.ttf");
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.sc-title {
   font-family: "Roboto", sans-serif;
   font-weight: 700;
 }
@@ -23,7 +18,7 @@ body {
   font-family: "Lato", sans-serif;
 }
 
-#forgot-password {
+.register {
   width: 50%;
 }
 
@@ -78,13 +73,13 @@ button {
 }
 
 @media (max-width: 1024px) {
-  #forgot-password {
+  .register {
     width: 65%;
   }
 }
 
 @media (max-width: 450px) {
-  #forgot-password {
+  .register {
     width: 80%;
   }
 }
@@ -94,7 +89,4 @@ button {
     padding-left: 0;
   }
 
-  .check-wrap {
-    padding-left: 0.9rem;
-  }
 }

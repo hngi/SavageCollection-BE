@@ -5,17 +5,7 @@ const multer = require("multer");
 const auth = require("../middleware/auth");
 
 //to define how the file shoul be stored
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    //cb() specifies potential error and a destination
-    cb(null, "./uploads");
-  },
-  filename: (req, file, cb) => {
-    console.log(file);
-    //cb() specifies potential error , and the original file name
-    cb(null, file.originalname);
-  },
-});
+const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
@@ -37,7 +27,7 @@ const upload = multer({
 router.post("/post/create", auth, upload.single("image"), user.CreatePost);
 router.get("/post", auth, user.GetUserPost);
 router.get("/posts", user.GetAllPost);
-router.get("/post/:_id/details", user.GetPostById);
-router.get("/post/:_id/delete", user.DeletePost);
+router.get("/post/:id/details", user.GetPostById);
+router.get("/post/:id/delete", user.DeletePost);
 
 module.exports = router;

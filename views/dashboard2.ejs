@@ -17,50 +17,50 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/dashboard.css" />
-    <link rel="stylesheet" href="/css/homepage2.css" />
     <title>Savage Collections | Home</title>
   </head>
 
   <body>
-    <!-- header -->
-    <header>
-      <nav id="nav" class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand logo" href="/user/dashboard">SC</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#savageCollections"
-          aria-controls="savageCollections"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+    <!-- Nav -->
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand logo" href="#">SC</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#savageCollections"
+        aria-controls="savageCollections"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="savageCollections">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link text-capitalize" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-capitalize" href="reward-1.html">Reward</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link text-capitalize" href="dashboard.html"
+              >Dashboard<span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-capitalize" href="view.html">Savages</a>
+          </li>
+        </ul>
+        <a
+          href=""
+          class="btn btn-lg action-2 px-5 my-2 my-sm-0 text-capitalize"
+          role="button"
+          >Log Out</a
         >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="savageCollections">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link text-capitalize" href="/user/dashboard"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-capitalize" href="/reward">Reward</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-capitalize" href="/posts">Savages</a>
-            </li>
-          </ul>
-          <a
-            href=""
-            class="btn btn-lg action-2 px-5 my-2 my-sm-0 text-capitalize"
-            role="button"
-            >Log Out</a
-          >
-        </div>
-      </nav>
-    </header>
-    <!-- header -->
+      </div>
+    </nav>
+
     <!-- main -->
     <main class="mt-5">
       <div class="user">
@@ -167,17 +167,26 @@
       </div>
     </main>
     <!-- main -->
-    <!-- footer -->
+
     <footer id="footer" class="text-center py-2">
       <p class="py-4">&copy; 2020 Savage Collections. All rights reserved</p>
     </footer>
-    <!-- footer -->
-    <!-- Bootstrap cdn -->
 
-    <script src="/js/jquery.js"></script>
-    <script src="/js/popper.js"></script>
-    <!-- Custom JS -->
     <script src="/js/user.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

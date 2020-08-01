@@ -1,34 +1,29 @@
 @font-face {
-  font-family: "Lemon Jelly";
+  font-family: 'Lemon Jelly';
   src: url("../fonts/LemonJellyPersonalUse-dEqR.ttf");
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Roboto", sans-serif;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
 }
 
 body {
   padding: 2rem 0;
   min-height: 100vh;
-  background: url("../images/SC.jpg") no-repeat center center/cover;
+  background: url('../images/SC.jpg') no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
-#forgot-password {
+#login {
   width: 50%;
 }
 
 .logo .brand {
-  font-family: "Lemon Jelly";
+  font-family: 'Lemon Jelly';
   font-size: 100px;
 }
 
@@ -36,8 +31,7 @@ body {
   text-decoration: none;
 }
 
-.logo,
-.form {
+.logo, .form {
   padding: 3rem 2rem;
 }
 
@@ -73,18 +67,33 @@ body {
   box-shadow: none;
 }
 
+#show_hide_password {
+  position: relative;
+}
+
+#show_hide_password a {
+  position: absolute;
+  color: #b6b5b5;
+  right: 0;
+  top: 15px;
+}
+
+#show_hide_password a:hover {
+  color: #007bff;
+}
+
 button {
   width: 100%;
 }
 
 @media (max-width: 1024px) {
-  #forgot-password {
+  #login {
     width: 65%;
   }
 }
 
 @media (max-width: 450px) {
-  #forgot-password {
+  #login {
     width: 80%;
   }
 }
@@ -95,6 +104,11 @@ button {
   }
 
   .check-wrap {
-    padding-left: 0.9rem;
+    padding-left: .9rem;
+  }
+
+  .login-options {
+    flex-direction: column;
+    text-align: center;
   }
 }

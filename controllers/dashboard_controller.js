@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const UploadModel = require("../models/uploads");
+const UserModel = require("../models/users");
 
 // exports.getDashboard = (req, res) => {
 //   UploadModel.find()
@@ -18,24 +19,27 @@ const UploadModel = require("../models/uploads");
 //     });
 // };
 
-exports.getDashboard = (req, res, next) => {
-  UploadModel.find()
-    .select()
-    .exec()
-    .then((results) => {
-      console.log(results);
-      console.log(req.userData);
-      let data = results.filter(
-        (result) => result.user_id == req.userData.user
-      );
-      res.status(200).render("dashboard", {
-        data,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
+exports.getDashboard = async (req, res, next) => {
+  console.log(req.userData);
+  try {
+    let user = {
+      username: req.userData.username,
+      email: req.userData.email,
+      user_id: req.userData._id,
+    };
+
+    let data = await UploadModel.find({ userId: req.userData._id })
+      .select()
+      .exec();
+
+    res.status(200).render("dashboard", {
+      data,
+      user,
     });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: err,
+    });
+  }
 };
