@@ -9,7 +9,6 @@ const cors = require("cors");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 const session = require("express-session");
-const flush = require("connect-flash");
 const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
 
@@ -64,7 +63,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(flush());
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -103,12 +101,12 @@ app.use(function (err, req, res, next) {
   });
 });
 
-// const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-// const server = http.createServer(app);
+const server = http.createServer(app);
 
-// server.listen(port, () => {
-//   console.log("listening on port " + port);
-// });
+server.listen(port, () => {
+  console.log("listening on port " + port);
+});
 
-module.exports = app;
+// module.exports = app;
